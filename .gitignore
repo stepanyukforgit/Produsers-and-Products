@@ -1,0 +1,11 @@
+# Binaries
+*.jar
+*.war
+*.class
+
+# Maven 
+target/
+
+# NetBeans
+nbactions.xml
+nb-configuration.xml
