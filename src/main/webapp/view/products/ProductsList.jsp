@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ProducerProducts
-    Created on : 03.08.2017, 19:26:02
+    Document   : ProductList
+    Created on : 03.08.2017, 19:26:40
     Author     : stepanyuk
 --%>
 
@@ -14,15 +14,15 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="Producers and products">
     <meta name="author" content="Aleksey Stepanyuk">
-    <link rel="icon" href="../pictures/favicon.ico">
+    <link rel="icon" href="../../pictures/favicon.ico">
 
     <title>Producers and products</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../css/dashboard.css" rel="stylesheet">
+    <link href="../../css/dashboard.css" rel="stylesheet">
 
   </head>
 
@@ -37,7 +37,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Producers and products</a>
+          <a class="navbar-brand" href="../../index.html">Producers and products</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -56,17 +56,17 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Main page <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="../../index.html">Main page <span class="sr-only">(current)</span></a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="">Producers</a></li>
+            <li><a href="../producers/ProducersList.jsp">Producers</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="">Products</a></li>
+            <li><a href="../products/ProductsList.jsp">Products</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Products of #producer</h1>
+          <h1 class="page-header">Products</h1>
 
         <div class="row placeholders">
           <div class="table-responsive">
@@ -77,6 +77,7 @@
                   <th>Name</th>
                   <th>price</th>
                   <th>Description</th>
+                  <th>Producer</th>
                 </tr>
               </thead>
               <tbody>
@@ -87,12 +88,14 @@
                   <td>very very very very very very very very very very 
                   very very very very very very very very very very very very 
                   very very good one</td>
+                  <td>First producer</td>
                 </tr>
                 <tr>
                   <td>2</td>
                   <td>Pencil</td>
                   <td>7</td>
                   <td>normal pencil</td>
+                  <td>Second producer</td>
                 </tr>
                 <tr>
                   <td>3</td>
@@ -101,6 +104,7 @@
                   <td>very very very very very very very very very very 
                   very very very very very very very very very very very 
                   very very very very very very very very very very bad one</td>
+                  <td>USA, NY</td>
                 </tr>
               </tbody>
             </table>
@@ -109,16 +113,5 @@
       </div>
     </div>
    </div>   
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="../../assets/js/vendor/holder.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>

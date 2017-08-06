@@ -7,8 +7,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.AUTO;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,8 +26,16 @@ public class Producer implements Serializable{
     private String description;
     private Set<Product> products = new HashSet<Product>();
 
+    public Producer() {}
+
+    public Producer(String name, String address, String description) {
+        this.name = name;
+        this.address = address;
+        this.description = description;
+    }
+    
     @Id
-    @GeneratedValue (strategy = AUTO)
+    @GeneratedValue (strategy = IDENTITY)
     @Column (name = "ID_PRODUCER")
     public Long getId() {
         return id;
@@ -55,6 +64,7 @@ public class Producer implements Serializable{
     }
 
     @Column (name = "DESCRIPTION", nullable = true)
+    @Lob
     public String getDescription() {
         return description;
     }
@@ -63,7 +73,7 @@ public class Producer implements Serializable{
         this.description = description;
     }
 
-    @OneToMany (mappedBy = "PRODUCER", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany (mappedBy = "producer", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Product> getProducts() {
         return products;
     }

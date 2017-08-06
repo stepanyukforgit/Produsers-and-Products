@@ -4,9 +4,10 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.AUTO;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -22,8 +23,16 @@ public class Product implements Serializable{
     private String description;
     private Producer producer;
 
+    public Product() {}
+
+    public Product(String name, String description, Producer producer) {
+        this.name = name;
+        this.description = description;
+        this.producer = producer;
+    }
+
     @Id
-    @GeneratedValue (strategy = AUTO)
+    @GeneratedValue (strategy = IDENTITY)
     @Column (name = "ID")
     public Long getId() {
         return id;
@@ -43,6 +52,7 @@ public class Product implements Serializable{
     }
 
     @Column (name = "DESCRIPTION", nullable = true)
+    @Lob
     public String getDescription() {
         return description;
     }
