@@ -1,5 +1,6 @@
 package stepanyuk.productsandproducers.services;
 
+import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import stepanyuk.productsandproducers.dao.ProducerDao;
@@ -15,8 +16,27 @@ public class ProducerServiceImpl implements ProducerService{
     private ProducerDao producerDao;
     
     @Override
-    public Producer saveProducer(Producer producer) {
+    public void saveProducer(Producer producer) {
         producerDao.saveProducer(producer);
-        return producer;
+    }
+
+    @Override
+    public List<Producer> findAll() {
+        return producerDao.findAll();
+    }
+
+    @Override
+    public Producer findById(Long id) {
+        return producerDao.findById(id);
+    }
+    
+    @Override
+    public void updateProducer(Producer producer) {
+        producerDao.updateProducer(producer);
+    }
+    
+    @Override
+    public void delete(Producer producer) {
+        producerDao.delete(producer);
     }
 }

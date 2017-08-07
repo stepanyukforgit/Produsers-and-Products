@@ -5,48 +5,49 @@ import javax.annotation.Resource;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import stepanyuk.productsandproducers.model.Producer;
+import stepanyuk.productsandproducers.model.Product;
+
 /**
  *
  * @author stepanyuk
  */
 @Transactional
-@Repository(value = "producerDao")
-public class ProducerDaoImpl implements ProducerDao{
+@Repository(value = "productDao")
+public class ProductDaoImpl implements ProductDao{
     
     private SessionFactory sessionFactory;
-
+    
     @Override
     @Transactional(readOnly = true)
-    public List<Producer> findAll() {
+    public List<Product> findAll() {
         return sessionFactory.getCurrentSession()
-                .createQuery("from Producer p").list();
+                .createQuery("from Product p").list();
     }
 
     @Override
-    public Producer findById(Long id) {
-        return sessionFactory.getCurrentSession().get(Producer.class, id);
+    public Product findById(Long id) {
+        return sessionFactory.getCurrentSession().get(Product.class, id);
     }
 
     @Override
-    public void saveProducer(Producer producer) {
-        sessionFactory.getCurrentSession().save(producer);
+    public void saveProduct(Product product) {
+        sessionFactory.getCurrentSession().save(product);
     }
     
     @Override
-    public void updateProducer(Producer producer) {
-        sessionFactory.getCurrentSession().update(producer);
+    public void updateProduct(Product product){
+        sessionFactory.getCurrentSession().update(product);
     }
 
     @Override
-    public void delete(Producer producer) {
-        sessionFactory.getCurrentSession().delete(producer);
+    public void delete(Product product) {
+        sessionFactory.getCurrentSession().delete(product);
     }
     
     public SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-
+    
     @Resource(name = "sessionFactory")
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
