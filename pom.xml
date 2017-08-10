@@ -51,8 +51,17 @@
             <artifactId>spring-orm</artifactId>
             <version>4.3.10.RELEASE</version>
         </dependency>
-
-        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>4.3.10.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>4.3.10.RELEASE</version>
+        </dependency>
+                
         <!--MySQL-->
         <dependency>
             <groupId>mysql</groupId>

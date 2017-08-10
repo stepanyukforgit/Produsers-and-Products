@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,15 +15,17 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="Producers and products">
     <meta name="author" content="Aleksey Stepanyuk">
-    <link rel="icon" href="../../pictures/favicon.ico">
+    <link rel="icon" href="<spring:url value="/resources/picture/favicon.ico" />">
+    <spring:url value="/resources/css/bootstrap.min.css" var="mainCss" />
+    <spring:url value="/resources/css/dashboard.css" var="dashCss" />
 
     <title>Producers and products</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="${mainCss}" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="../../css/dashboard.css" rel="stylesheet">
+    <link href="${dashCss}" rel="stylesheet" />
 
   </head>
 
@@ -37,7 +40,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="../../index.html">Producers and products</a>
+          <a class="navbar-brand" href="../">Producers and products</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -56,13 +59,13 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="../../index.html">Main page <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="../">Main page <span class="sr-only">(current)</span></a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="../producers/ProducersList.jsp">Producers</a></li>
+            <li><a href="ProducersList">Producers</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="../products/ProductsList.jsp">Products</a></li>
+            <li><a href="../products/ProductsList">Products</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -83,12 +86,15 @@
               <tbody>
                 <tr>
                   <td>1</td>
-                  <td>First Producer</td>
+                  <td><a href="ProducerInfo">First Producer</a></td>
                   <td>Ukrain, Odessa</td>
                   <td>very very very very very very very very very very 
                   very very very very very very very very very very very very very very good one</td>
-                  <td>product, product, product, product, product, product,
-                  product, product, product, product, product, </td>
+                  <td><a href="ProducerProducts">
+                          product, product, product, product, product, product,
+                          product, product, product, product, product
+                      </a>
+                  </td>
                 </tr>
                 <tr>
                   <td>2</td>
