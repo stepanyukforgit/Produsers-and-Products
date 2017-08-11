@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="stepanyuk.productsandproducers.model.Producer"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,14 +69,24 @@
             <li><a href="../products/ProductsList">Products</a></li>
           </ul>
         </div>
+        <% Producer producer = (Producer) request.getAttribute("producer");%>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">#producer name</h1>
-          <h4>#address</h4>
-          <h6>description description description description description description 
-          description description description description description description description 
-          description description description description description description description </h6>
-          <h3>#products</h3>
-      </div>
+          <form action="ProducerInfo" method="POST">
+            <div class="form-group">
+              <label >Producer name</label>
+              <input type="text" class="form-control" id="usr" name="producerName" value="<%= producer.getName() %>">
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <input type="text" class="form-control" id="usr" name="producerAddress" value="<%= producer.getAddress() %>">
+            </div>              
+            <div class="form-group">
+              <label>Description</label>
+              <textarea class="form-control" rows="5" name="producerDescription"><%= producer.getDescription() %></textarea>
+            </div>
+            <button type="submit" class="btn btn-success btn-lg" name="producerId" value="<%= producer.getId() %>">Save all changes</button>
+          </form>
+        </div>
     </div>
    </div>   
   </body>

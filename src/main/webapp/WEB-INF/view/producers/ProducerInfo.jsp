@@ -57,30 +57,36 @@
     </nav>
 
    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="../">Main page <span class="sr-only">(current)</span></a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="ProducersList">Producers</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="../products/ProductsList">Products</a></li>
-          </ul>
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="active"><a href="../">Main page <span class="sr-only">(current)</span></a></li>
+        </ul>
+        <ul class="nav nav-sidebar">
+          <li><a href="ProducersList">Producers</a></li>
+        </ul>
+        <ul class="nav nav-sidebar">
+          <li><a href="../products/ProductsList">Products</a></li>
+        </ul>
+      </div>
+    <% Producer producer = (Producer) request.getAttribute("producerId");%>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <h1 class="page-header"><%= producer.getName() %></h1>
+      <h4><%= producer.getAddress() %></h4>
+      <h5><%= producer.getDescription() %></h5>
+      <h3>REFERENCE ON PRODUCTS LIST!!!</h3>
+         <div class="row">
+             <div class="col-md-1">
+            <form action="ProducerEdit">
+              <button name="producerId" class="btn btn-primary" type="submit" value="<%= producer.getId() %>">EDIT</button>
+            </form>
+          </div>
+          <div class="col-md-1">
+            <form action="ProducersList">
+              <button name="producerId" class="btn btn-danger" type="submit" value="<%= producer.getId() %>">DELETE</button>
+            </form>
+          </div>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header"><a href="ProducerEdit">#producer name</a></h1>
-          <h4>#address</h4>
-          <h6>description description description description description description 
-          description description description description description description description 
-          description description description description description description description </h6>
-          <h3>#products</h3>
-          <% Producer p = (Producer)request.getAttribute("producer"); %>
-          <h1><%= p.getName() %></h1>
-          <h2><%= p.getAddress() %></h2>
-          <h3><%= p.getId() %></h3>
-          <h4><%= p.getDescription() %></h4>
       </div>
     </div>
    </div>   

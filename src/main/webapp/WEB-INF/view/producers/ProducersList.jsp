@@ -4,6 +4,8 @@
     Author     : stepanyuk
 --%>
 
+<%@page import="stepanyuk.productsandproducers.model.Producer"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
@@ -18,6 +20,7 @@
     <link rel="icon" href="<spring:url value="/resources/picture/favicon.ico" />">
     <spring:url value="/resources/css/bootstrap.min.css" var="mainCss" />
     <spring:url value="/resources/css/dashboard.css" var="dashCss" />
+    <spring:url value="/resources/js/bootstrap.min.js" var="mainJs" />
 
     <title>Producers and products</title>
 
@@ -80,45 +83,66 @@
                   <th>Name</th>
                   <th>Address</th>
                   <th>Description</th>
-                  <th>Products</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td><a href="ProducerInfo">First Producer</a></td>
-                  <td>Ukrain, Odessa</td>
-                  <td>very very very very very very very very very very 
-                  very very very very very very very very very very very very very very good one</td>
-                  <td><a href="ProducerProducts">
-                          product, product, product, product, product, product,
-                          product, product, product, product, product
-                      </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Second Producer</td>
-                  <td>Ukrain, Kharkiv</td>
-                  <td>normal producer</td>
-                  <td>product, product, product, product, product, product,
-                  product, product. </td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Third Producer</td>
-                  <td>USA, NY</td>
-                  <td>very very very very very very very very very very 
-                  very very very very very very very very very very very 
-                  very very very very very very very very very very bad one</td>
-                  <td>product, product. </td>
-                </tr>
+                  <% List<Producer> producers = (List<Producer>)request.getAttribute("producers"); %>
+                  <% for (int i = 0; i < producers.size(); i++){ %>
+                    <tr align="left">
+                      <td width="3%"><%= i + 1 %></td>
+                      <td width="17%">
+                        <a href="ProducerInfo?producerId=<%= producers.get(i).getId() %>">
+                            <%= producers.get(i).getName() %>
+                        </a>
+                      </td>
+                      <td width="30%"><%= producers.get(i).getAddress() %></td>
+                      <td width="50%"><%= producers.get(i).getDescription() %></td>
+                    </tr>
+                    <%}%>
               </tbody>
             </table>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-producer-modal">Add new Producer</button>  
           </div>
         </div>
       </div>
     </div>
-   </div>   
+   </div>
+              
+   <!--Modal window start-->
+    <div class="modal fade" id="add-producer-modal">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <form action="ProducersList" method="POST">
+                <div class="modal-header">
+                  <button class="close" type="button" data-dismiss="modal">&times;</button>
+                  <h4 class="maodal-title">Add new producer</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label>Producer name:</label>
+                    <input type="text" class="form-control" name="producerName" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Address:</label>
+                    <input type="text" class="form-control" name="producerAddress" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Description:</label>
+                    <textarea class="form-control" rows="5" name="producerDescription"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">Add</button>
+                  </div>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+    <!--Modal window end-->
+   
+    <!-- Bootstrap core JavaScript================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="${mainJs}"></script>
   </body>
 </html>

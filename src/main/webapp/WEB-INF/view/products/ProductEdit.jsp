@@ -74,15 +74,15 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <form action="ProductInfo" method="POST">
             <div class="form-group">
-              <label for="usr">Product name</label>
+              <label>Product name</label>
               <input type="text" class="form-control" id="usr" name="productName" value="<%= product.getName() %>">
             </div>
             <div class="form-group">
-                <label for="usr">Price</label>
+                <label>Price</label>
                 <input type="text" class="form-control" id="usr" name="productPrice" value="<%= product.getPrice() %>">
             </div>              
             <div class="form-group">
-              <label for="comment">Description</label>
+              <label>Description</label>
               <textarea class="form-control" rows="5" name="productDescription"><%= product.getDescription() %></textarea>
             </div>
             
