@@ -21,13 +21,15 @@ public class Product implements Serializable{
     private Long id;
     private String name;
     private String description;
+    private Integer price;
     private Producer producer;
 
     public Product() {}
 
-    public Product(String name, String description, Producer producer) {
+    public Product(String name, String description, Integer price, Producer producer) {
         this.name = name;
         this.description = description;
+        this.price = price;
         this.producer = producer;
     }
 
@@ -59,6 +61,15 @@ public class Product implements Serializable{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Column (name = "PRICE", nullable = true)
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
     
     @ManyToOne

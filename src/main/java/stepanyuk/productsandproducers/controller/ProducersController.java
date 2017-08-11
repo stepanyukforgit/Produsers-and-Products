@@ -1,9 +1,13 @@
 package stepanyuk.productsandproducers.controller;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import stepanyuk.productsandproducers.model.Producer;
+import stepanyuk.productsandproducers.model.Product;
 import stepanyuk.productsandproducers.services.ProducerService;
 
 /**

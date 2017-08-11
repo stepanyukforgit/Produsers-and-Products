@@ -4,6 +4,9 @@
     Author     : stepanyuk
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="stepanyuk.productsandproducers.model.Producer"%>
+<%@page import="stepanyuk.productsandproducers.model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
@@ -67,14 +70,34 @@
             <li><a href="ProductsList">Products</a></li>
           </ul>
         </div>
+        <% Product product = (Product) request.getAttribute("product");%>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">#product name</h1>
-          <h4>#ptice</h4>
-          <h6>description description description description description description 
-          description description description description description description description 
-          description description description description description description description </h6>
-          <h3>#producer</h3>
-      </div>
+          <form action="ProductInfo" method="POST">
+            <div class="form-group">
+              <label for="usr">Product name</label>
+              <input type="text" class="form-control" id="usr" name="productName" value="<%= product.getName() %>">
+            </div>
+            <div class="form-group">
+                <label for="usr">Price</label>
+                <input type="text" class="form-control" id="usr" name="productPrice" value="<%= product.getPrice() %>">
+            </div>              
+            <div class="form-group">
+              <label for="comment">Description</label>
+              <textarea class="form-control" rows="5" name="productDescription"><%= product.getDescription() %></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="sel1">Producer:</label>
+                <select class="form-control" name="producerId" required>
+                  <% List<Producer> producers = (List<Producer>)request.getAttribute("producers"); %>
+                  <% for (int i = 0; i < producers.size(); i++){ %>
+                  <option value="<%= producers.get(i).getId() %>"><%= producers.get(i).getName() %></option>
+                  <%}%>   
+                </select>                
+              </div>
+            <button type="submit" class="btn btn-success btn-lg" name="productId" value="<%= product.getId() %>">Save all changes</button>
+          </form>
+        </div>
     </div>
    </div>   
   </body>

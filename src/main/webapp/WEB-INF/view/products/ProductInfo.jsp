@@ -4,6 +4,7 @@
     Author     : stepanyuk
 --%>
 
+<%@page import="stepanyuk.productsandproducers.model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
@@ -56,25 +57,36 @@
     </nav>
 
    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="../">Main page <span class="sr-only">(current)</span></a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="../producers/ProducersList">Producers</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="ProductsList">Products</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header"><a href="ProductEdit">#product name</a></h1>
-          <h4>#ptice</h4>
-          <h6>description description description description description description 
-          description description description description description description description 
-          description description description description description description description </h6>
-          <h3>#producer</h3>
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="active"><a href="../">Main page <span class="sr-only">(current)</span></a></li>
+        </ul>
+        <ul class="nav nav-sidebar">
+          <li><a href="../producers/ProducersList">Producers</a></li>
+        </ul>
+        <ul class="nav nav-sidebar">
+          <li><a href="ProductsList">Products</a></li>
+        </ul>
+      </div>
+      <% Product product = (Product) request.getAttribute("productId");%>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header"><%= product.getName() %></h1>
+        <h4><%= product.getPrice() %></h4>
+        <h5><%= product.getDescription() %></h5>
+        <h3><%= product.getProducer().getName() %></h3>
+           <div class="row">
+               <div class="col-md-1">
+              <form action="ProductEdit">
+                <button name="productId" class="btn btn-primary" type="submit" value="<%= product.getId() %>">EDIT</button>
+              </form>
+            </div>
+            <div class="col-md-1">
+              <form action="ProductsList">
+                <button name="productId" class="btn btn-danger" type="submit" value="<%= product.getId() %>">DELETE</button>
+              </form>
+            </div>
+          </div>
       </div>
     </div>
    </div>   
