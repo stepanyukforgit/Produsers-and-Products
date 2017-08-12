@@ -1,6 +1,5 @@
 package stepanyuk.productsandproducers.controller;
 
-import java.util.ArrayList;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +33,7 @@ public class ProducersController {
     
     @RequestMapping(value="/ProducersList", params="producerId", method=GET)
     public String showProducersList(@RequestParam String producerId, Model model){
-        producerService.delete(producerService.findById(Long.valueOf(producerId)));
+        producerService.delete(producerId);
         model.addAttribute("producers", producerService.findAll());
         return "producers/ProducersList";
     }
@@ -45,9 +44,7 @@ public class ProducersController {
             @RequestParam("producerAddress")String producerAddress,
             @RequestParam("producerDescription")String producerDescription,
             Model model){
-          
-        producerService.saveProducer(
-                new Producer(producerName, producerAddress, producerDescription));
+        producerService.saveProducer(producerName, producerAddress, producerDescription);
         model.addAttribute("producers", producerService.findAll());
         return "producers/ProducersList";
     }
@@ -65,12 +62,8 @@ public class ProducersController {
             @RequestParam("producerDescription")String producerDescription,
             @RequestParam("producerId")String producerId,
             Model model){
-        Producer producer = producerService.findById(Long.valueOf(producerId));
-        producer.setName(producerName);
-        producer.setAddress(producerAddress);
-        producer.setDescription(producerDescription);
-        producerService.updateProducer(producer);
-        model.addAttribute("producerId", producer);
+        producerService.updateProducer(producerName, producerAddress, producerDescription, producerId);
+        model.addAttribute("producerId", producerId);
         return "producers/ProducerInfo";
     }
     
@@ -87,17 +80,14 @@ public class ProducersController {
     }
     
     @RequestMapping(value="/ProducerProducts", method=POST)
-    public String showProducerProducts(
+    public String showNewProducerProducts(
             @RequestParam("productName")String productName,
             @RequestParam("productPrice")String productPrice,
             @RequestParam("productDescription")String productDescription,
             @RequestParam("producerId")String producerId,
             Model model){
-          
-        productService.saveProduct(
-                new Product(productName, productDescription, 
-                        Integer.valueOf(productPrice),
-                        producerService.findById(Long.valueOf(producerId))));
+        productService.saveProduct(productName, productDescription, 
+                productPrice, producerService.findById(Long.valueOf(producerId)));
         model.addAttribute("producer", producerService.findByIdWithProducts(Long.valueOf(producerId)));
         return "producers/ProducerProducts";
     }

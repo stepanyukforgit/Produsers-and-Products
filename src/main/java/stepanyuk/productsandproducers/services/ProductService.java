@@ -1,6 +1,7 @@
 package stepanyuk.productsandproducers.services;
 
 import java.util.List;
+import stepanyuk.productsandproducers.model.Producer;
 import stepanyuk.productsandproducers.model.Product;
 
 /**
@@ -9,9 +10,9 @@ import stepanyuk.productsandproducers.model.Product;
  */
 public interface ProductService {
     
-    void saveProduct(Product product);
+    void saveProduct(String productName, String productPrice, String productDescription, Producer producer);
     List<Product> findAll();
     Product findById(Long id);
-    void updateProduct(Product product);
+    void updateProduct(String productName, String productPrice, String productDescription, String id, Producer producer);
     void delete(Product product);
 }

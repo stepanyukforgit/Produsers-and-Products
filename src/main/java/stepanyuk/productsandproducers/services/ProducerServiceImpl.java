@@ -1,13 +1,10 @@
 package stepanyuk.productsandproducers.services;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import stepanyuk.productsandproducers.dao.ProducerDao;
 import stepanyuk.productsandproducers.model.Producer;
-import stepanyuk.productsandproducers.model.Product;
 /**
  *
  * @author stepanyuk
@@ -19,8 +16,8 @@ public class ProducerServiceImpl implements ProducerService{
     private ProducerDao producerDao;
     
     @Override
-    public void saveProducer(Producer producer) {
-        producerDao.saveProducer(producer);
+    public void saveProducer(String producerName, String producerAddress, String producerDescription) {
+        producerDao.saveProducer(new Producer(producerName, producerAddress, producerDescription));
     }
 
     @Override
@@ -35,17 +32,21 @@ public class ProducerServiceImpl implements ProducerService{
     
     @Override
     public Producer findByIdWithProducts(Long id){
-        System.out.println("-----in findByIdWithProducts(service)");
         return producerDao.findByIdWithProducts(id);
     }
     
     @Override
-    public void updateProducer(Producer producer) {
+    public void updateProducer(String producerName, String producerAddress, 
+            String producerDescription, String id) {
+        Producer producer = findById(Long.valueOf(id));
+        producer.setName(producerName);
+        producer.setAddress(producerAddress);
+        producer.setDescription(producerDescription);
         producerDao.updateProducer(producer);
     }
     
     @Override
-    public void delete(Producer producer) {
-        producerDao.delete(producer);
+    public void delete(String id) {
+        producerDao.delete(findById(Long.valueOf(id)));
     }
 }

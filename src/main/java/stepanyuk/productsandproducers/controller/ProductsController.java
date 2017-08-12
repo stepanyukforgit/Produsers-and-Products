@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.bind.annotation.RequestParam;
-import stepanyuk.productsandproducers.model.Product;
 import stepanyuk.productsandproducers.services.ProducerService;
 import stepanyuk.productsandproducers.services.ProductService;
 
@@ -46,11 +45,9 @@ public class ProductsController {
             @RequestParam("productDescription")String productDescription,
             @RequestParam("producerId")String producerId,
             Model model){
-          
-        productService.saveProduct(
-                new Product(productName, productDescription, 
-                        Integer.valueOf(productPrice),
-                        producerService.findById(Long.valueOf(producerId))));
+        productService.saveProduct(productName, productDescription, 
+            productPrice, producerService.findById(Long.valueOf(producerId)));
+        
         model.addAttribute("producers", producerService.findAll());
         model.addAttribute("products", productService.findAll());
         return "products/ProductsList";
@@ -70,13 +67,9 @@ public class ProductsController {
             @RequestParam("producerId")String producerId,
             @RequestParam("productId")String productId,
             Model model){
-        Product product = productService.findById(Long.valueOf(productId));
-        product.setName(productName);
-        product.setPrice(Integer.parseInt(productPrice));
-        product.setDescription(productDescription);
-        product.setProducer(producerService.findById(Long.valueOf(producerId)));
-        productService.updateProduct(product);
-        model.addAttribute("productId", product);
+        productService.updateProduct(productName, productPrice, 
+                productDescription, productId, producerService.findById(Long.valueOf(producerId)));
+        model.addAttribute("productId", productId);
         return "products/ProductInfo";
     }
     

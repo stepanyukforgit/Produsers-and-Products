@@ -4,6 +4,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import stepanyuk.productsandproducers.dao.ProductDao;
+import stepanyuk.productsandproducers.model.Producer;
 import stepanyuk.productsandproducers.model.Product;
 /**
  *
@@ -16,10 +17,11 @@ public class ProductServiceImpl implements ProductService{
     private ProductDao productDao;
     
     @Override
-    public void saveProduct(Product product) {
-        productDao.saveProduct(product);
+    public void saveProduct(String productName, String productPrice, String productDescription, Producer producer) {
+        productDao.saveProduct(
+            new Product(productName, productDescription, Integer.valueOf(productPrice),producer));
     }
-
+ 
     @Override
     public List<Product> findAll() {
         return productDao.findAll();
@@ -32,7 +34,13 @@ public class ProductServiceImpl implements ProductService{
     
     
     @Override
-    public void updateProduct(Product product) {
+    public void updateProduct(String productName, String productPrice, 
+            String productDescription, String id, Producer producer) {
+        Product product = findById(Long.valueOf(id));
+        product.setName(productName);
+        product.setPrice(Integer.parseInt(productPrice));
+        product.setDescription(productDescription);
+        product.setProducer(producer);
         productDao.updateProduct(product);
     }
     
