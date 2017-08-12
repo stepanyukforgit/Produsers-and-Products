@@ -2,6 +2,7 @@ package stepanyuk.productsandproducers.dao;
 
 import java.util.List;
 import javax.annotation.Resource;
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,13 @@ public class ProducerDaoImpl implements ProducerDao{
     @Override
     public Producer findById(Long id) {
         return sessionFactory.getCurrentSession().get(Producer.class, id);
+    }
+    
+    @Override
+    public Producer findByIdWithProducts(Long id){
+        Producer producer = sessionFactory.getCurrentSession().get(Producer.class, id);
+        Hibernate.initialize(producer.getProducts());
+        return producer;
     }
 
     @Override

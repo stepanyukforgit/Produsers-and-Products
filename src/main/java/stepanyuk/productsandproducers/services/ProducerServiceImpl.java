@@ -1,10 +1,13 @@
 package stepanyuk.productsandproducers.services;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import stepanyuk.productsandproducers.dao.ProducerDao;
 import stepanyuk.productsandproducers.model.Producer;
+import stepanyuk.productsandproducers.model.Product;
 /**
  *
  * @author stepanyuk
@@ -28,6 +31,12 @@ public class ProducerServiceImpl implements ProducerService{
     @Override
     public Producer findById(Long id) {
         return producerDao.findById(id);
+    }
+    
+    @Override
+    public Producer findByIdWithProducts(Long id){
+        System.out.println("-----in findByIdWithProducts(service)");
+        return producerDao.findByIdWithProducts(id);
     }
     
     @Override

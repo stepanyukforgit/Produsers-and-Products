@@ -74,7 +74,7 @@
       <h1 class="page-header"><%= producer.getName() %></h1>
       <h4><%= producer.getAddress() %></h4>
       <h5><%= producer.getDescription() %></h5>
-      <h3>REFERENCE ON PRODUCTS LIST!!!</h3>
+      <h3><a href="ProducerProducts?producerId=<%= producer.getId() %>">see all products of the producer</a></h3>
          <div class="row">
              <div class="col-md-1">
             <form action="ProducerEdit">
