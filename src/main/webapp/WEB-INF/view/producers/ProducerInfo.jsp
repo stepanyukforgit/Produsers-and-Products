@@ -69,7 +69,7 @@
           <li><a href="../products/ProductsList">Products</a></li>
         </ul>
       </div>
-    <% Producer producer = (Producer) request.getAttribute("producerId");%>
+    <% Producer producer = (Producer) request.getAttribute("producer");%>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <h1 class="page-header"><%= producer.getName() %></h1>
       <h4><%= producer.getAddress() %></h4>

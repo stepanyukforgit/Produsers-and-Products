@@ -63,16 +63,16 @@
    <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="../">Main page <span class="sr-only">(current)</span></a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="../producers/ProducersList">Producers</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="ProductsList">Products</a></li>
-          </ul>
-        </div>
+            <ul class="nav nav-sidebar">
+              <li class="active"><a href="../">Main page <span class="sr-only">(current)</span></a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+              <li><a href="ProducersList">Producers</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+              <li><a href="../products/ProductsList">Products</a></li>
+            </ul>
+      </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <% Producer producer = (Producer) request.getAttribute("producer"); %>
             <h1 class="page-header">Producer: <%= producer.getName() %></h1>
