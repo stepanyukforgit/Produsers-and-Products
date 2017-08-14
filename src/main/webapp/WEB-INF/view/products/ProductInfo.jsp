@@ -69,7 +69,7 @@
           <li><a href="ProductsList">Products</a></li>
         </ul>
       </div>
-      <% Product product = (Product) request.getAttribute("productId");%>
+      <% Product product = (Product) request.getAttribute("product");%>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <h1 class="page-header"><%= product.getName() %></h1>
         <h4><%= product.getPrice() %></h4>

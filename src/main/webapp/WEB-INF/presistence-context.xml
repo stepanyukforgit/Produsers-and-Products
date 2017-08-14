@@ -19,9 +19,9 @@
     <bean id="dataSource" 
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/prod" />
-        <property name="username" value="root" />
-        <property name="password" value="mysql" />
+        <property name="url" value="jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_76c45aceb49d3d0?reconnect=true" />
+        <property name="username" value="bf95cc0874ff1a" />
+        <property name="password" value="e49375da" />
     </bean>
     
     <bean id="sessionFactory" 

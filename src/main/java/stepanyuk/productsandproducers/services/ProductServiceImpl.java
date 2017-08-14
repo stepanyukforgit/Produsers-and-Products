@@ -17,7 +17,7 @@ public class ProductServiceImpl implements ProductService{
     private ProductDao productDao;
     
     @Override
-    public void saveProduct(String productName, String productPrice, String productDescription, Producer producer) {
+    public void saveProduct(String productName, String productDescription, String productPrice, Producer producer) {
         productDao.saveProduct(
             new Product(productName, productDescription, Integer.valueOf(productPrice),producer));
     }

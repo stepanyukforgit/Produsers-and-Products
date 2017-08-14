@@ -55,7 +55,7 @@ public class ProductsController {
     
     @RequestMapping(value="/ProductInfo", method=GET)
     public String showProductInfo(String productId, Model model){
-        model.addAttribute("productId", productService.findById(Long.valueOf(productId)));
+        model.addAttribute("product", productService.findById(Long.valueOf(productId)));
         return "products/ProductInfo";
     }
     
@@ -69,7 +69,7 @@ public class ProductsController {
             Model model){
         productService.updateProduct(productName, productPrice, 
                 productDescription, productId, producerService.findById(Long.valueOf(producerId)));
-        model.addAttribute("productId", productId);
+        model.addAttribute("product", productService.findById(Long.valueOf(productId)));
         return "products/ProductInfo";
     }
     
