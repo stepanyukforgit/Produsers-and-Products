@@ -51,7 +51,7 @@ public class ProducersController {
     
     @RequestMapping(value="/ProducerInfo", method=GET)
     public String showProducerInfo(String producerId, Model model){
-        model.addAttribute("producerId", producerService.findById(Long.valueOf(producerId)));
+        model.addAttribute("producer", producerService.findById(Long.valueOf(producerId)));
         return "producers/ProducerInfo";
     }
     
@@ -63,7 +63,7 @@ public class ProducersController {
             @RequestParam("producerId")String producerId,
             Model model){
         producerService.updateProducer(producerName, producerAddress, producerDescription, producerId);
-        model.addAttribute("producerId", producerId);
+        model.addAttribute("producer", producerService.findById(Long.valueOf(producerId)));
         return "producers/ProducerInfo";
     }
     
