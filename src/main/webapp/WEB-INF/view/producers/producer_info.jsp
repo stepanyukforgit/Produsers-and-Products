@@ -41,7 +41,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="../">Producers and products</a>
+          <a class="navbar-brand" href="/">Producers and products</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
@@ -55,13 +55,13 @@
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-          <li class="active"><a href="../">Main page <span class="sr-only">(current)</span></a></li>
+          <li class="active"><a href="/">Main page <span class="sr-only">(current)</span></a></li>
         </ul>
         <ul class="nav nav-sidebar">
-          <li><a href="producers_list">Producers</a></li>
+          <li><a href="/producers/producers_list">Producers</a></li>
         </ul>
         <ul class="nav nav-sidebar">
-          <li><a href="../products/products_list">Products</a></li>
+          <li><a href="/products/products_list">Products</a></li>
         </ul>
       </div>
     <% Producer producer = (Producer) request.getAttribute("producer");%>
@@ -69,15 +69,15 @@
       <h1 class="page-header"><%= producer.getName() %></h1>
       <h4><%= producer.getAddress() %></h4>
       <h5><%= producer.getDescription() %></h5>
-      <h3><a href="producer_products?producerId=<%= producer.getId() %>">see all products of the producer</a></h3>
+      <h3><a href="/producers/producer_products?producerId=<%= producer.getId() %>">see all products of the producer</a></h3>
          <div class="row">
              <div class="col-md-1">
-            <form action="producer_edit">
+            <form action="/producers/producer_edit">
               <button name="producerId" class="btn btn-primary" type="submit" value="<%= producer.getId() %>">EDIT</button>
             </form>
           </div>
           <div class="col-md-1">
-            <form action="producers_list">
+            <form action="/producers/producers_list">
               <button name="producerId" class="btn btn-danger" type="submit" value="<%= producer.getId() %>">DELETE</button>
             </form>
           </div>

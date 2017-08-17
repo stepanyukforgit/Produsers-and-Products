@@ -43,7 +43,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="../">Producers and products</a>
+          <a class="navbar-brand" href="/">Producers and products</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
@@ -57,13 +57,13 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="../">Main page <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="/">Main page <span class="sr-only">(current)</span></a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="producers_list">Producers</a></li>
+            <li><a href="/producers/producers_list">Producers</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="../products/products_list">Products</a></li>
+            <li><a href="/products/products_list">Products</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -86,7 +86,7 @@
                     <tr align="left">
                       <td width="3%"><%= i + 1 %></td>
                       <td width="17%">
-                        <a href="producer_info?producerId=<%= producers.get(i).getId() %>">
+                        <a href="/producers/producer_info?producerId=<%= producers.get(i).getId() %>">
                             <%= producers.get(i).getName() %>
                         </a>
                       </td>
@@ -107,7 +107,7 @@
     <div class="modal fade" id="add-producer-modal">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
-              <form action="producers_list" method="POST">
+              <form action="/producers/producers_list" method="POST">
                 <div class="modal-header">
                   <button class="close" type="button" data-dismiss="modal">&times;</button>
                   <h4 class="maodal-title">Add new producer</h4>

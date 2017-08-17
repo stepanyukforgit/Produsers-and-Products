@@ -41,7 +41,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="../">Producers and products</a>
+          <a class="navbar-brand" href="/">Producers and products</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
@@ -55,14 +55,14 @@
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-          <li class="active"><a href="../">Main page <span class="sr-only">(current)</span></a></li>
+          <li class="active"><a href="/">Main page <span class="sr-only">(current)</span></a></li>
         </ul>
         <ul class="nav nav-sidebar">
-          <li><a href="../producers/producers_list">Producers</a></li>
-        </ul>
+          <li><a href="/producers/producers_list">Producers</a></li>
+        </ul>       
         <ul class="nav nav-sidebar">
-          <li><a href="products_list">Products</a></li>
-        </ul>
+          <li><a href="/products/products_list">Products</a></li>
+        </ul>                  
       </div>
       <% Product product = (Product) request.getAttribute("product");%>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -72,12 +72,12 @@
         <h3><%= product.getProducer().getName() %></h3>
            <div class="row">
                <div class="col-md-1">
-              <form action="product_edit">
+              <form action="/products/product_edit">
                 <button name="productId" class="btn btn-primary" type="submit" value="<%= product.getId() %>">EDIT</button>
               </form>
             </div>
             <div class="col-md-1">
-              <form action="products_list">
+              <form action="/products/products_list">
                 <button name="productId" class="btn btn-danger" type="submit" value="<%= product.getId() %>">DELETE</button>
               </form>
             </div>
