@@ -6,8 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.bind.annotation.RequestParam;
-import stepanyuk.productsandproducers.model.Producer;
-import stepanyuk.productsandproducers.model.Product;
 import stepanyuk.productsandproducers.services.ProducerService;
 import stepanyuk.productsandproducers.services.ProductService;
 
@@ -25,20 +23,20 @@ public class ProducersController {
     @Resource(name = "producerService")
     private ProducerService producerService;  
     
-    @RequestMapping(value="/ProducersList", method=GET)
+    @RequestMapping(value="/producers_list", method=GET)
     public String showProducersList(Model model){
         model.addAttribute("producers", producerService.findAll());
-        return "producers/ProducersList";
+        return "producers/producers_list";
     }
     
-    @RequestMapping(value="/ProducersList", params="producerId", method=GET)
+    @RequestMapping(value="/producers_list", params="producerId", method=GET)
     public String showProducersList(@RequestParam String producerId, Model model){
         producerService.delete(producerId);
         model.addAttribute("producers", producerService.findAll());
-        return "producers/ProducersList";
+        return "producers/producers_list";
     }
 
-    @RequestMapping(value="/ProducersList", method=POST)
+    @RequestMapping(value="/producers_list", method=POST)
     public String showNewProducersList(
             @RequestParam("producerName")String producerName,
             @RequestParam("producerAddress")String producerAddress,
@@ -46,16 +44,16 @@ public class ProducersController {
             Model model){
         producerService.saveProducer(producerName, producerAddress, producerDescription);
         model.addAttribute("producers", producerService.findAll());
-        return "producers/ProducersList";
+        return "producers/producers_list";
     }
     
-    @RequestMapping(value="/ProducerInfo", method=GET)
+    @RequestMapping(value="/producer_info", method=GET)
     public String showProducerInfo(String producerId, Model model){
         model.addAttribute("producer", producerService.findById(Long.valueOf(producerId)));
-        return "producers/ProducerInfo";
+        return "producers/producer_info";
     }
     
-    @RequestMapping(value="/ProducerInfo", method=POST)
+    @RequestMapping(value="/producer_info", method=POST)
     public String showEditedProducerInfo(
             @RequestParam("producerName")String producerName,
             @RequestParam("producerAddress")String producerAddress,
@@ -64,22 +62,22 @@ public class ProducersController {
             Model model){
         producerService.updateProducer(producerName, producerAddress, producerDescription, producerId);
         model.addAttribute("producer", producerService.findById(Long.valueOf(producerId)));
-        return "producers/ProducerInfo";
+        return "producers/producer_info";
     }
     
-    @RequestMapping(value="/ProducerEdit", method=GET)
+    @RequestMapping(value="/producer_edit", method=GET)
     public String showProducerEdit(String producerId, Model model){
         model.addAttribute("producer", producerService.findById(Long.valueOf(producerId)));
-        return "producers/ProducerEdit";
+        return "producers/producer_edit";
     }
     
-    @RequestMapping("/ProducerProducts")
+    @RequestMapping("/producer_products")
     public String showProducerProducts(String producerId, Model model){
         model.addAttribute("producer", producerService.findByIdWithProducts(Long.valueOf(producerId)));
-        return "producers/ProducerProducts";
+        return "producers/producer_products";
     }
     
-    @RequestMapping(value="/ProducerProducts", method=POST)
+    @RequestMapping(value="/producer_products", method=POST)
     public String showNewProducerProducts(
             @RequestParam("productName")String productName,
             @RequestParam("productPrice")String productPrice,
@@ -89,6 +87,6 @@ public class ProducersController {
         productService.saveProduct(productName, productDescription, 
                 productPrice, producerService.findById(Long.valueOf(producerId)));
         model.addAttribute("producer", producerService.findByIdWithProducts(Long.valueOf(producerId)));
-        return "producers/ProducerProducts";
+        return "producers/producer_products";
     }
 }

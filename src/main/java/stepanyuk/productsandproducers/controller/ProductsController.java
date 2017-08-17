@@ -23,22 +23,22 @@ public class ProductsController {
     @Resource(name = "producerService")
     private ProducerService producerService;  
     
-    @RequestMapping(value="/ProductsList", method=GET)
+    @RequestMapping(value="/products_list", method=GET)
     public String showProductsList(Model model){
         model.addAttribute("producers", producerService.findAll());
         model.addAttribute("products", productService.findAll());
-        return "products/ProductsList";
+        return "products/products_list";
     }
     
-    @RequestMapping(value="/ProductsList", params="productId", method=GET)
+    @RequestMapping(value="/products_list", params="productId", method=GET)
     public String showProductsList(@RequestParam String productId, Model model){
         productService.delete(productService.findById(Long.valueOf(productId)));
         model.addAttribute("producers", producerService.findAll());
         model.addAttribute("products", productService.findAll());
-        return "products/ProductsList";
+        return "products/products_list";
     }
     
-    @RequestMapping(value="/ProductsList", method=POST)
+    @RequestMapping(value="/products_list", method=POST)
     public String showNewProductsList(
             @RequestParam("productName")String productName,
             @RequestParam("productPrice")String productPrice,
@@ -50,16 +50,16 @@ public class ProductsController {
         
         model.addAttribute("producers", producerService.findAll());
         model.addAttribute("products", productService.findAll());
-        return "products/ProductsList";
+        return "products/products_list";
     }
     
-    @RequestMapping(value="/ProductInfo", method=GET)
+    @RequestMapping(value="/product_info", method=GET)
     public String showProductInfo(String productId, Model model){
         model.addAttribute("product", productService.findById(Long.valueOf(productId)));
-        return "products/ProductInfo";
+        return "products/product_info";
     }
     
-    @RequestMapping(value="/ProductInfo", method=POST)
+    @RequestMapping(value="/product_info", method=POST)
     public String showEditedProductInfo(
             @RequestParam("productName")String productName,
             @RequestParam("productPrice")String productPrice,
@@ -70,13 +70,13 @@ public class ProductsController {
         productService.updateProduct(productName, productPrice, 
                 productDescription, productId, producerService.findById(Long.valueOf(producerId)));
         model.addAttribute("product", productService.findById(Long.valueOf(productId)));
-        return "products/ProductInfo";
+        return "products/product_info";
     }
     
-    @RequestMapping(value="/ProductEdit", method=GET)
+    @RequestMapping(value="/product_edit", method=GET)
     public String showProductEdit(String productId, Model model){
         model.addAttribute("producers", producerService.findAll());
         model.addAttribute("product", productService.findById(Long.valueOf(productId)));
-        return "products/ProductEdit";
+        return "products/product_edit";
     }
 }
