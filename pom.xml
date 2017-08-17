@@ -10,6 +10,7 @@
     <name>ProductsAndProducers</name>
 
     <properties>
+        <!--allows user to provide newer versions of certain packages than those provided by the JDK-->
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--DRY(dont repeat yourself)-->

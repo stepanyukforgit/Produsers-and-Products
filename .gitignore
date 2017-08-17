@@ -10,3 +10,7 @@ target/
 nbactions.xml
 nb-configuration.xml
 
+#Heroku
+Procfile.windows
+.env
+
