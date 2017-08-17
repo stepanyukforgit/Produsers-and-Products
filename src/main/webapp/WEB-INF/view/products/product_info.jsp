@@ -44,11 +44,6 @@
           <a class="navbar-brand" href="../">Producers and products</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
           </form>
@@ -63,10 +58,10 @@
           <li class="active"><a href="../">Main page <span class="sr-only">(current)</span></a></li>
         </ul>
         <ul class="nav nav-sidebar">
-          <li><a href="../producers/ProducersList">Producers</a></li>
+          <li><a href="../producers/producers_list">Producers</a></li>
         </ul>
         <ul class="nav nav-sidebar">
-          <li><a href="ProductsList">Products</a></li>
+          <li><a href="products_list">Products</a></li>
         </ul>
       </div>
       <% Product product = (Product) request.getAttribute("product");%>
@@ -77,12 +72,12 @@
         <h3><%= product.getProducer().getName() %></h3>
            <div class="row">
                <div class="col-md-1">
-              <form action="ProductEdit">
+              <form action="product_edit">
                 <button name="productId" class="btn btn-primary" type="submit" value="<%= product.getId() %>">EDIT</button>
               </form>
             </div>
             <div class="col-md-1">
-              <form action="ProductsList">
+              <form action="products_list">
                 <button name="productId" class="btn btn-danger" type="submit" value="<%= product.getId() %>">DELETE</button>
               </form>
             </div>

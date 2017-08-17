@@ -44,11 +44,6 @@
           <a class="navbar-brand" href="../">Producers and products</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
           </form>
@@ -63,15 +58,15 @@
             <li class="active"><a href="../">Main page <span class="sr-only">(current)</span></a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="ProducersList">Producers</a></li>
+            <li><a href="producers_list">Producers</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="../products/ProductsList">Products</a></li>
+            <li><a href="../products/products_list">Products</a></li>
           </ul>
         </div>
         <% Producer producer = (Producer) request.getAttribute("producer");%>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <form action="ProducerInfo" method="POST">
+          <form action="producer_info" method="POST">
             <div class="form-group">
               <label >Producer name</label>
               <input type="text" class="form-control" id="usr" name="producerName" value="<%= producer.getName() %>">

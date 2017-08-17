@@ -45,11 +45,6 @@
           <a class="navbar-brand" href="">Producers and products</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
           </form>
@@ -64,10 +59,10 @@
             <li class="active"><a href="">Main page <span class="sr-only">(current)</span></a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="producers/ProducersList">Producers</a></li>
+            <li><a href="producers/producers_list">Producers</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="products/ProductsList">Products</a></li>
+            <li><a href="products/products_list">Products</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -77,13 +72,13 @@
           
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-6 placeholder">
-                <a href="producers/ProducersList">
+                <a href="producers/producers_list">
                     <img src="${producerImg}" class="img-responsive" alt="Generic placeholder thumbnail">
                     <h4>Producers</h4>
                 </a>
             </div>
             <div class="col-xs-6 col-sm-6 placeholder">
-                <a href="products/ProductsList">
+                <a href="products/products_list">
                     <img src="${productImg}" class="img-responsive" alt="Generic placeholder thumbnail">
                     <h4>Products</h4>
                 </a>
@@ -94,4 +89,3 @@
     </div>
   </body>
 </html>
-

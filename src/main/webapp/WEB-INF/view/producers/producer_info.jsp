@@ -44,11 +44,6 @@
           <a class="navbar-brand" href="../">Producers and products</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
           </form>
@@ -63,10 +58,10 @@
           <li class="active"><a href="../">Main page <span class="sr-only">(current)</span></a></li>
         </ul>
         <ul class="nav nav-sidebar">
-          <li><a href="ProducersList">Producers</a></li>
+          <li><a href="producers_list">Producers</a></li>
         </ul>
         <ul class="nav nav-sidebar">
-          <li><a href="../products/ProductsList">Products</a></li>
+          <li><a href="../products/products_list">Products</a></li>
         </ul>
       </div>
     <% Producer producer = (Producer) request.getAttribute("producer");%>
@@ -74,15 +69,15 @@
       <h1 class="page-header"><%= producer.getName() %></h1>
       <h4><%= producer.getAddress() %></h4>
       <h5><%= producer.getDescription() %></h5>
-      <h3><a href="ProducerProducts?producerId=<%= producer.getId() %>">see all products of the producer</a></h3>
+      <h3><a href="producer_products?producerId=<%= producer.getId() %>">see all products of the producer</a></h3>
          <div class="row">
              <div class="col-md-1">
-            <form action="ProducerEdit">
+            <form action="producer_edit">
               <button name="producerId" class="btn btn-primary" type="submit" value="<%= producer.getId() %>">EDIT</button>
             </form>
           </div>
           <div class="col-md-1">
-            <form action="ProducersList">
+            <form action="producers_list">
               <button name="producerId" class="btn btn-danger" type="submit" value="<%= producer.getId() %>">DELETE</button>
             </form>
           </div>
