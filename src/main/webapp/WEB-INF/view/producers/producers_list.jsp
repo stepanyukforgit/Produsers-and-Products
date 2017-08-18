@@ -4,6 +4,7 @@
     Author     : stepanyuk
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="stepanyuk.productsandproducers.model.Producer"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -81,19 +82,18 @@
                 </tr>
               </thead>
               <tbody>
-                  <% List<Producer> producers = (List<Producer>)request.getAttribute("producers"); %>
-                  <% for (int i = 0; i < producers.size(); i++){ %>
+                  <c:forEach var="producer" items="${producers}" varStatus="loop">
                     <tr align="left">
-                      <td width="3%"><%= i + 1 %></td>
+                      <td width="3%">${loop.count}</td>
                       <td width="17%">
-                        <a href="/producers/producer_info?producerId=<%= producers.get(i).getId() %>">
-                            <%= producers.get(i).getName() %>
+                        <a href="/producers/producer_info/${producer.id}">
+                            ${producer.name}
                         </a>
                       </td>
-                      <td width="30%"><%= producers.get(i).getAddress() %></td>
-                      <td width="50%"><%= producers.get(i).getDescription() %></td>
-                    </tr>
-                    <%}%>
+                      <td width="30%">${producer.address}</td>
+                      <td width="50%">${producer.description}</td>
+                    </tr>  
+                  </c:forEach>
               </tbody>
             </table>
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-producer-modal">Add new Producer</button>  

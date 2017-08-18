@@ -64,21 +64,20 @@
           <li><a href="/products/products_list">Products</a></li>
         </ul>
       </div>
-    <% Producer producer = (Producer) request.getAttribute("producer");%>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <h1 class="page-header"><%= producer.getName() %></h1>
-      <h4><%= producer.getAddress() %></h4>
-      <h5><%= producer.getDescription() %></h5>
-      <h3><a href="/producers/producer_products?producerId=<%= producer.getId() %>">see all products of the producer</a></h3>
+      <h1 class="page-header">${producer.name}</h1>
+      <h4>${producer.address}</h4>
+      <h5>${producer.description}</h5>
+      <h3><a href="/producers/producer_products/${producer.id}">see all products of the producer</a></h3>
          <div class="row">
              <div class="col-md-1">
-            <form action="/producers/producer_edit">
-              <button name="producerId" class="btn btn-primary" type="submit" value="<%= producer.getId() %>">EDIT</button>
+            <form action="/producers/producer_edit/${producer.id}">
+              <button class="btn btn-primary" type="submit">EDIT</button>
             </form>
           </div>
           <div class="col-md-1">
             <form action="/producers/producers_list">
-              <button name="producerId" class="btn btn-danger" type="submit" value="<%= producer.getId() %>">DELETE</button>
+              <button name="producerId" class="btn btn-danger" type="submit" value="${producer.id}">DELETE</button>
             </form>
           </div>
         </div>

@@ -64,22 +64,21 @@
             <li><a href="/products/products_list">Products</a></li>
           </ul>
         </div>
-        <% Producer producer = (Producer) request.getAttribute("producer");%>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <form action="/producers/producer_info" method="POST">
             <div class="form-group">
               <label >Producer name</label>
-              <input type="text" class="form-control" id="usr" name="producerName" value="<%= producer.getName() %>">
+              <input type="text" class="form-control" id="usr" name="producerName" value="${producer.name}">
             </div>
             <div class="form-group">
                 <label>Address</label>
-                <input type="text" class="form-control" id="usr" name="producerAddress" value="<%= producer.getAddress() %>">
+                <input type="text" class="form-control" id="usr" name="producerAddress" value="${producer.address}">
             </div>              
             <div class="form-group">
               <label>Description</label>
-              <textarea class="form-control" rows="5" name="producerDescription"><%= producer.getDescription() %></textarea>
+              <textarea class="form-control" rows="5" name="producerDescription">${producer.description}</textarea>
             </div>
-            <button type="submit" class="btn btn-success btn-lg" name="producerId" value="<%= producer.getId() %>">Save all changes</button>
+            <button type="submit" class="btn btn-success btn-lg" name="producerId" value="${producer.id}">Save all changes</button>
           </form>
         </div>
     </div>

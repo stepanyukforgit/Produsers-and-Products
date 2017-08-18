@@ -3,6 +3,7 @@ package stepanyuk.productsandproducers.controller;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +29,8 @@ public class ProducersController {
         model.addAttribute("producers", producerService.findAll());
         return "producers/producers_list";
     }
-    
+
+//make with AJAX
     @RequestMapping(value="/producers_list", params="producerId", method=GET)
     public String showProducersList(@RequestParam String producerId, Model model){
         producerService.delete(producerId);
@@ -36,54 +38,49 @@ public class ProducersController {
         return "producers/producers_list";
     }
 
+//remove @RequestParams
     @RequestMapping(value="/producers_list", method=POST)
-    public String showNewProducersList(
-            @RequestParam("producerName")String producerName,
-            @RequestParam("producerAddress")String producerAddress,
-            @RequestParam("producerDescription")String producerDescription,
-            Model model){
+    public String addNewProducer(@RequestParam String producerName, @RequestParam String producerAddress, 
+            @RequestParam String producerDescription, Model model){
         producerService.saveProducer(producerName, producerAddress, producerDescription);
         model.addAttribute("producers", producerService.findAll());
         return "producers/producers_list";
     }
-    
-    @RequestMapping(value="/producer_info", method=GET)
-    public String showProducerInfo(String producerId, Model model){
-        model.addAttribute("producer", producerService.findById(Long.valueOf(producerId)));
+
+//pass Producer
+    @RequestMapping(value="/producer_info/{producerId}", method=GET)
+    public String showProducerInfo(@PathVariable Long producerId, Model model){
+        model.addAttribute("producer", producerService.findById(producerId));
         return "producers/producer_info";
+    }
+        
+    @RequestMapping(value="/producer_edit/{producerId}", method=GET)
+    public String showProducerEdit(@PathVariable Long producerId, Model model){
+        model.addAttribute("producer", producerService.findById(producerId));
+        return "producers/producer_edit";
     }
     
     @RequestMapping(value="/producer_info", method=POST)
-    public String showEditedProducerInfo(
-            @RequestParam("producerName")String producerName,
-            @RequestParam("producerAddress")String producerAddress,
-            @RequestParam("producerDescription")String producerDescription,
-            @RequestParam("producerId")String producerId,
-            Model model){
+    public String editProducer(@RequestParam String producerName,
+            @RequestParam String producerAddress, @RequestParam String producerDescription,
+            @RequestParam String producerId, Model model){
         producerService.updateProducer(producerName, producerAddress, producerDescription, producerId);
         model.addAttribute("producer", producerService.findById(Long.valueOf(producerId)));
         return "producers/producer_info";
     }
-    
-    @RequestMapping(value="/producer_edit", method=GET)
-    public String showProducerEdit(String producerId, Model model){
-        model.addAttribute("producer", producerService.findById(Long.valueOf(producerId)));
-        return "producers/producer_edit";
-    }
-    
-    @RequestMapping("/producer_products")
-    public String showProducerProducts(String producerId, Model model){
-        model.addAttribute("producer", producerService.findByIdWithProducts(Long.valueOf(producerId)));
+   
+    @RequestMapping("/producer_products/{producerId}")
+    public String showProducerProducts(@PathVariable Long producerId, Model model){
+System.out.println("----------------in showProducerProducts");
+        model.addAttribute("producer", producerService.findByIdWithProducts(producerId));
         return "producers/producer_products";
     }
-    
+
+//replace String with Producer
     @RequestMapping(value="/producer_products", method=POST)
-    public String showNewProducerProducts(
-            @RequestParam("productName")String productName,
-            @RequestParam("productPrice")String productPrice,
-            @RequestParam("productDescription")String productDescription,
-            @RequestParam("producerId")String producerId,
-            Model model){
+    public String showNewProducerProducts(@RequestParam String productName,
+            @RequestParam String productPrice, @RequestParam String productDescription,
+            @RequestParam String producerId, Model model){
         productService.saveProduct(productName, productDescription, 
                 productPrice, producerService.findById(Long.valueOf(producerId)));
         model.addAttribute("producer", producerService.findByIdWithProducts(Long.valueOf(producerId)));

@@ -64,21 +64,20 @@
           <li><a href="/products/products_list">Products</a></li>
         </ul>                  
       </div>
-      <% Product product = (Product) request.getAttribute("product");%>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h1 class="page-header"><%= product.getName() %></h1>
-        <h4><%= product.getPrice() %></h4>
-        <h5><%= product.getDescription() %></h5>
-        <h3><%= product.getProducer().getName() %></h3>
+        <h1 class="page-header">${product.name}</h1>
+        <h4>${product.price}</h4>
+        <h5>${product.description}</h5>
+        <h3>${product.producer.name}</h3>
            <div class="row">
                <div class="col-md-1">
-              <form action="/products/product_edit">
-                <button name="productId" class="btn btn-primary" type="submit" value="<%= product.getId() %>">EDIT</button>
+              <form action="/products/product_edit/${product.id}">
+                <button class="btn btn-primary" type="submit">EDIT</button>
               </form>
             </div>
             <div class="col-md-1">
               <form action="/products/products_list">
-                <button name="productId" class="btn btn-danger" type="submit" value="<%= product.getId() %>">DELETE</button>
+                <button name="productId" class="btn btn-danger" type="submit" value="${product.id}">DELETE</button>
               </form>
             </div>
           </div>

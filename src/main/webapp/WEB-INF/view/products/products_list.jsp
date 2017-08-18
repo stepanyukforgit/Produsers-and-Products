@@ -9,6 +9,7 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -82,20 +83,17 @@
                 </tr>
               </thead>
               <tbody>
-                  <% List<Product> products = (List<Product>)request.getAttribute("products"); %>
-                  <% for (int i = 0; i < products.size(); i++){ %>
-                    <tr align="left">
-                      <td width="3%"><%= i + 1 %></td>
+                  <c:forEach var="product" items="${products}" varStatus="loop">
+                      <tr align="left">
+                      <td width="3%">${loop.count}</td>
                       <td width="17%">
-                        <a href="/products/product_info?productId=<%= products.get(i).getId() %>">
-                            <%= products.get(i).getName() %>
-                        </a>
+                        <a href="/products/product_info/${product.id}">${product.name}</a>
                       </td>
-                      <td width="10%"><%= products.get(i).getPrice() %></td>
-                      <td width="50%"><%= products.get(i).getDescription() %></td>
-                      <td width="20%"><%= products.get(i).getProducer().getName() %></td>
+                      <td width="10%">${product.price}</td>
+                      <td width="50%">${product.description}</td>
+                      <td width="20%">${product.producer.name}</td>
                     </tr>
-                    <%}%>
+                  </c:forEach>
               </tbody>
             </table>
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-product-modal">Add new Product</button>              
@@ -131,11 +129,10 @@
                   <div class="form-group">
                     <label for="sel1">Producer:</label>
                     <select class="form-control" name="producerId" required>
-                      <% List<Producer> producers = (List<Producer>)request.getAttribute("producers"); %>
-                      <% for (int i = 0; i < producers.size(); i++){ %>
-                      <option value="<%= producers.get(i).getId() %>"><%= producers.get(i).getName() %></option>
-                      <%}%>   
-                    </select>                
+                      <c:forEach var="producer" items="${producers}" varStatus="loop">
+                        <option value="${producer.id}">${producer.name}</option>
+                      </c:forEach>
+                    </select>
                   </div>
                   <div class="modal-footer">
                     <button class="btn btn-success" type="submit">Add</button>

@@ -4,6 +4,7 @@
     Author     : stepanyuk
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List"%>
 <%@page import="stepanyuk.productsandproducers.model.Producer"%>
 <%@page import="stepanyuk.productsandproducers.model.Product"%>
@@ -65,32 +66,32 @@
             <li><a href="/products/products_list">Products</a></li>
           </ul>
         </div>
-        <% Product product = (Product) request.getAttribute("product");%>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <form action="/products/product_info" method="POST">
             <div class="form-group">
               <label>Product name</label>
-              <input type="text" class="form-control" id="usr" name="productName" value="<%= product.getName() %>">
+              <input type="text" class="form-control" id="usr" name="productName" value="${product.name}">
             </div>
             <div class="form-group">
                 <label>Price</label>
-                <input type="text" class="form-control" id="usr" name="productPrice" value="<%= product.getPrice() %>">
+                <input type="text" class="form-control" id="usr" name="productPrice" value="${product.price}">
             </div>              
             <div class="form-group">
               <label>Description</label>
-              <textarea class="form-control" rows="5" name="productDescription"><%= product.getDescription() %></textarea>
+              <textarea class="form-control" rows="5" name="productDescription">${product.description}</textarea>
             </div>
             
             <div class="form-group">
                 <label for="sel1">Producer:</label>
                 <select class="form-control" name="producerId" required>
-                  <% List<Producer> producers = (List<Producer>)request.getAttribute("producers"); %>
-                  <% for (int i = 0; i < producers.size(); i++){ %>
-                  <option value="<%= producers.get(i).getId() %>"><%= producers.get(i).getName() %></option>
-                  <%}%>   
+                  <c:forEach var="producer" items="${producers}">
+                      <option value="${producer.id}" <c:if test="${product.producer.id==producer.id}">selected</c:if>>
+                          ${producer.name}
+                      </option>    
+                  </c:forEach>
                 </select>                
               </div>
-            <button type="submit" class="btn btn-success btn-lg" name="productId" value="<%= product.getId() %>">Save all changes</button>
+            <button type="submit" class="btn btn-success btn-lg" name="productId" value="${product.id}">Save all changes</button>
           </form>
         </div>
     </div>

@@ -4,6 +4,7 @@
     Author     : stepanyuk
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="stepanyuk.productsandproducers.model.Producer"%>
@@ -69,8 +70,7 @@
             </ul>
       </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <% Producer producer = (Producer) request.getAttribute("producer"); %>
-            <h1 class="page-header">Producer: <%= producer.getName() %></h1>
+            <h1 class="page-header">Producer: ${producer.name}</h1>
         <div class="row placeholders">
           <div class="table-responsive">
             <table class="table table-striped">
@@ -83,19 +83,18 @@
                 </tr>
               </thead>
               <tbody>
-                  <% List<Product> products = new ArrayList<Product>(producer.getProducts()); %>
-                  <% for (int i = 0; i < products.size(); i++){ %>
+                  <c:forEach var="product" items="${producer.products}" varStatus="loop">
                     <tr align="left">
-                      <td width="3%"><%= i + 1 %></td>
+                      <td width="3%">${loop.count}</td>
                       <td width="17%">
-                        <a href="/products/product_info?productId=<%= products.get(i).getId() %>">
-                            <%= products.get(i).getName() %>
+                        <a href="/products/product_info/${product.id}">
+                            ${product.name}
                         </a>
                       </td>
-                      <td width="10%"><%= products.get(i).getPrice() %></td>
-                      <td width="50%"><%= products.get(i).getDescription() %></td>
-                    </tr>
-                    <%}%>
+                      <td width="10%">${product.price}</td>
+                      <td width="50%">${product.description}</td>
+                    </tr>  
+                  </c:forEach>                    
               </tbody>
             </table>
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-product-modal">Add new Product</button>              
@@ -109,7 +108,7 @@
     <div class="modal fade" id="add-product-modal">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
-              <form action="/producers/producer_products?producerId=<%= producer.getId() %>" method="POST">
+              <form action="/producers/producer_products" method="POST">
                 <div class="modal-header">
                   <button class="close" type="button" data-dismiss="modal">&times;</button>
                   <h4 class="maodal-title">Add new product</h4>
@@ -128,7 +127,7 @@
                     <textarea class="form-control" rows="5" name="productDescription"></textarea>
                   </div>
                   <div class="modal-footer">
-                    <button class="btn btn-success" type="submit">Add</button>
+                      <button name="producerId" class="btn btn-success" type="submit" value="${producer.id}">Add</button>
                   </div>
                 </div>
             </form>
@@ -143,3 +142,4 @@
     <script src="${mainJs}"></script>
   </body>
 </html>
+
