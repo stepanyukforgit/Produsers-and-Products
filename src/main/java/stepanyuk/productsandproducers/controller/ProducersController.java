@@ -1,6 +1,6 @@
 package stepanyuk.productsandproducers.controller;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,10 +18,10 @@ import stepanyuk.productsandproducers.services.ProductService;
 @RequestMapping("/producers")
 public class ProducersController {
         
-    @Resource(name = "productService")
+    @Autowired
     private ProductService productService;
     
-    @Resource(name = "producerService")
+    @Autowired
     private ProducerService producerService;  
     
     @RequestMapping(value="/producers_list", method=GET)
@@ -32,16 +32,18 @@ public class ProducersController {
 
 //make with AJAX
     @RequestMapping(value="/producers_list", params="producerId", method=GET)
-    public String showProducersList(@RequestParam String producerId, Model model){
+    public String deleteProducer(String producerId, Model model){
         producerService.delete(producerId);
         model.addAttribute("producers", producerService.findAll());
         return "producers/producers_list";
     }
 
-//remove @RequestParams
+//@RequestParam is for domonstration
     @RequestMapping(value="/producers_list", method=POST)
-    public String addNewProducer(@RequestParam String producerName, @RequestParam String producerAddress, 
-            @RequestParam String producerDescription, Model model){
+    public String addNewProducer(
+            @RequestParam("producerName") String producerName, 
+            @RequestParam String producerAddress, 
+            String producerDescription, Model model){
         producerService.saveProducer(producerName, producerAddress, producerDescription);
         model.addAttribute("producers", producerService.findAll());
         return "producers/producers_list";
@@ -61,9 +63,8 @@ public class ProducersController {
     }
     
     @RequestMapping(value="/producer_info", method=POST)
-    public String editProducer(@RequestParam String producerName,
-            @RequestParam String producerAddress, @RequestParam String producerDescription,
-            @RequestParam String producerId, Model model){
+    public String editProducer(String producerName, String producerAddress, 
+            String producerDescription, String producerId, Model model){
         producerService.updateProducer(producerName, producerAddress, producerDescription, producerId);
         model.addAttribute("producer", producerService.findById(Long.valueOf(producerId)));
         return "producers/producer_info";
@@ -71,16 +72,14 @@ public class ProducersController {
    
     @RequestMapping("/producer_products/{producerId}")
     public String showProducerProducts(@PathVariable Long producerId, Model model){
-System.out.println("----------------in showProducerProducts");
         model.addAttribute("producer", producerService.findByIdWithProducts(producerId));
         return "producers/producer_products";
     }
 
 //replace String with Producer
     @RequestMapping(value="/producer_products", method=POST)
-    public String showNewProducerProducts(@RequestParam String productName,
-            @RequestParam String productPrice, @RequestParam String productDescription,
-            @RequestParam String producerId, Model model){
+    public String addProducerProduct(String productName,String productPrice, 
+            String productDescription, String producerId, Model model){
         productService.saveProduct(productName, productDescription, 
                 productPrice, producerService.findById(Long.valueOf(producerId)));
         model.addAttribute("producer", producerService.findByIdWithProducts(Long.valueOf(producerId)));

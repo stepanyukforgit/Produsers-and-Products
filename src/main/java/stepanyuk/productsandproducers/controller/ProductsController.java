@@ -1,6 +1,6 @@
 package stepanyuk.productsandproducers.controller;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,10 +18,10 @@ import stepanyuk.productsandproducers.services.ProductService;
 @RequestMapping("/products")
 public class ProductsController {
     
-    @Resource(name = "productService")
+    @Autowired
     private ProductService productService;
     
-    @Resource(name = "producerService")
+    @Autowired
     private ProducerService producerService;  
     
     @RequestMapping(value="/products_list", method=GET)
@@ -32,17 +32,19 @@ public class ProductsController {
     }
 //make with AJAX
     @RequestMapping(value="/products_list", params="productId", method=GET)
-    public String deleteProduct(@RequestParam String productId, Model model){
+    public String deleteProduct(String productId, Model model){
         productService.delete(productService.findById(Long.valueOf(productId)));
         model.addAttribute("producers", producerService.findAll());
         model.addAttribute("products", productService.findAll());
         return "products/products_list";
     }
-    
+
+//@RequestParam is for domonstration
     @RequestMapping(value="/products_list", method=POST)
-    public String addNewProduct(@RequestParam String productName,
-            @RequestParam String productPrice,@RequestParam String productDescription,
-            @RequestParam String producerId, Model model){
+    public String addNewProduct(
+            @RequestParam("productName") String productName,
+            @RequestParam String productPrice,
+            String productDescription, String producerId, Model model){
         productService.saveProduct(productName, productDescription, 
             productPrice, producerService.findById(Long.valueOf(producerId)));
         model.addAttribute("producers", producerService.findAll());
@@ -63,10 +65,8 @@ public class ProductsController {
         return "products/product_edit";
     }
     @RequestMapping(value="/product_info", method=POST)
-    public String editProduct(@RequestParam String productName,
-            @RequestParam String productPrice, @RequestParam String productDescription,
-            @RequestParam String producerId, @RequestParam String productId,
-            Model model){
+    public String editProduct(String productName, String productPrice, String productDescription,
+            String producerId, String productId, Model model){
         productService.updateProduct(productName, productPrice, 
                 productDescription, productId, producerService.findById(Long.valueOf(producerId)));
         model.addAttribute("product", productService.findById(Long.valueOf(productId)));

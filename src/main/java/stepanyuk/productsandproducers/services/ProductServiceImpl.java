@@ -1,7 +1,7 @@
 package stepanyuk.productsandproducers.services;
 
 import java.util.List;
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import stepanyuk.productsandproducers.dao.ProductDao;
 import stepanyuk.productsandproducers.model.Producer;
@@ -10,10 +10,10 @@ import stepanyuk.productsandproducers.model.Product;
  *
  * @author stepanyuk
  */
-@Service(value = "productService")
+@Service
 public class ProductServiceImpl implements ProductService{
 
-    @Resource(name = "productDao")
+    @Autowired
     private ProductDao productDao;
     
     @Override

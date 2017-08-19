@@ -1,9 +1,9 @@
 package stepanyuk.productsandproducers.dao;
 
 import java.util.List;
-import javax.annotation.Resource;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import stepanyuk.productsandproducers.model.Producer;
@@ -12,9 +12,10 @@ import stepanyuk.productsandproducers.model.Producer;
  * @author stepanyuk
  */
 @Transactional
-@Repository(value = "producerDao")
+@Repository
 public class ProducerDaoImpl implements ProducerDao{
     
+    @Autowired
     private SessionFactory sessionFactory;
 
     @Override
@@ -25,11 +26,13 @@ public class ProducerDaoImpl implements ProducerDao{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Producer findById(Long id) {
         return sessionFactory.getCurrentSession().get(Producer.class, id);
     }
     
     @Override
+    @Transactional(readOnly = true)
     public Producer findByIdWithProducts(Long id){
         Producer producer = sessionFactory.getCurrentSession().get(Producer.class, id);
         Hibernate.initialize(producer.getProducts());
@@ -49,14 +52,5 @@ public class ProducerDaoImpl implements ProducerDao{
     @Override
     public void delete(Producer producer) {
         sessionFactory.getCurrentSession().delete(producer);
-    }
-    
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-    @Resource(name = "sessionFactory")
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
     }
 }
