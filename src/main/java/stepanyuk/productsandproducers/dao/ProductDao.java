@@ -10,6 +10,7 @@ import stepanyuk.productsandproducers.model.Product;
 public interface ProductDao {
     
     List<Product> findAll();
+    List<Product> findByName(String searchProducts);
     Product findById(Long id);
     void updateProduct(Product product);
     void saveProduct(Product product);

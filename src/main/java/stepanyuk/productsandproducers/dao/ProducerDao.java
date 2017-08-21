@@ -10,6 +10,7 @@ import stepanyuk.productsandproducers.model.Producer;
 public interface ProducerDao {
 
     List<Producer> findAll();
+    List<Producer> findByName(String searchProducers);
     Producer findById(Long id);
     Producer findByIdWithProducts(Long id);
     void updateProducer(Producer producer);

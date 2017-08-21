@@ -45,4 +45,10 @@ public class ProductDaoImpl implements ProductDao{
     public void delete(Product product) {
         sessionFactory.getCurrentSession().delete(product);
     }
+    
+    @Override
+    public List<Product> findByName(String searchProducts){
+        String hql = "from Product p where lower(p.name) like lower('%" + searchProducts + "%')";
+        return sessionFactory.getCurrentSession().createQuery(hql).list();
+    }
 }

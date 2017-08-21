@@ -10,9 +10,10 @@ import stepanyuk.productsandproducers.model.Product;
  */
 public interface ProductService {
     
-    void saveProduct(String productName, String productPrice, String productDescription, Producer producer);
     List<Product> findAll();
+    List<Product> searchProducts(String searchProducts);
     Product findById(Long id);
+    void saveProduct(String productName, String productPrice, String productDescription, Producer producer);
     void updateProduct(String productName, String productPrice, String productDescription, String id, Producer producer);
     void delete(Product product);
 }

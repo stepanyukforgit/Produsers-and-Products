@@ -53,4 +53,10 @@ public class ProducerDaoImpl implements ProducerDao{
     public void delete(Producer producer) {
         sessionFactory.getCurrentSession().delete(producer);
     }
+    
+    @Override
+    public List<Producer> findByName(String searchProducers){
+        String hql = "from Producer p where lower(p.name) like lower('%" + searchProducers + "%')";
+        return sessionFactory.getCurrentSession().createQuery(hql).list();
+    }
 }

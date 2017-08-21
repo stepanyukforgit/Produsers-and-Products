@@ -49,4 +49,9 @@ public class ProducerServiceImpl implements ProducerService{
     public void delete(String id) {
         producerDao.delete(findById(Long.valueOf(id)));
     }
+    
+    @Override
+    public List<Producer> searchProducers(String searchProducers){
+        return producerDao.findByName(searchProducers);
+    }
 }

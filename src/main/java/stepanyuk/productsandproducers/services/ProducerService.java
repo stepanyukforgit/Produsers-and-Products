@@ -11,6 +11,7 @@ public interface ProducerService {
     
     void saveProducer(String producerName, String producerAddress, String producerDescription);
     List<Producer> findAll();
+    List<Producer> searchProducers(String searchProducers);
     Producer findById(Long id);
     Producer findByIdWithProducts(Long id);
     void updateProducer(String producerName, String producerAddress, String producerDescription, String id);

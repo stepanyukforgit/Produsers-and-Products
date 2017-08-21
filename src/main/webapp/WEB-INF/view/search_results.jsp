@@ -21,7 +21,6 @@
     <link rel="icon" href="<spring:url value="/resources/picture/favicon.ico" />">
     <spring:url value="/resources/css/bootstrap.min.css" var="mainCss" />
     <spring:url value="/resources/css/dashboard.css" var="dashCss" />
-    <spring:url value="/resources/js/bootstrap.min.js" var="mainJs" />
 
     <title>Producers and products</title>
 
@@ -68,8 +67,9 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Producers</h1>
-
+          <h1 class="page-header">Search results</h1>
+        
+        <h3>Producers</h3>
         <div class="row placeholders">
           <div class="table-responsive">
             <table class="table table-striped">
@@ -96,48 +96,39 @@
                   </c:forEach>
               </tbody>
             </table>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-producer-modal">Add new Producer</button>  
+          </div>
+        </div>
+        <h3>Producers</h3>
+        <div class="row placeholders">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>price</th>
+                  <th>Description</th>
+                  <th>Producer</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <c:forEach var="product" items="${products}" varStatus="loop">
+                      <tr align="left">
+                      <td width="3%">${loop.count}</td>
+                      <td width="17%">
+                        <a href="/products/product_info/${product.id}">${product.name}</a>
+                      </td>
+                      <td width="10%">${product.price}</td>
+                      <td width="50%">${product.description}</td>
+                      <td width="20%">${product.producer.name}</td>
+                    </tr>
+                  </c:forEach>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
    </div>
-              
-   <!--Modal window start-->
-    <div class="modal fade" id="add-producer-modal">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-              <form action="/producers/producers_list" method="POST">
-                <div class="modal-header">
-                  <button class="close" type="button" data-dismiss="modal">&times;</button>
-                  <h4 class="maodal-title">Add new producer</h4>
-                </div>
-                <div class="modal-body">
-                  <div class="form-group">
-                    <label>Producer name:</label>
-                    <input type="text" class="form-control" name="producerName" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Address:</label>
-                    <input type="text" class="form-control" name="producerAddress" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Description:</label>
-                    <textarea class="form-control" rows="5" name="producerDescription"></textarea>
-                  </div>
-                  <div class="modal-footer">
-                    <button class="btn btn-success" type="submit">Add</button>
-                  </div>
-                </div>
-            </form>
-          </div>
-        </div>
-    </div>
-    <!--Modal window end-->
-   
-    <!-- Bootstrap core JavaScript================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="${mainJs}"></script>
   </body>
 </html>
