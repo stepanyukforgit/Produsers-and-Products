@@ -1,6 +1,7 @@
 package stepanyuk.productsandproducers.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,12 +22,12 @@ public class Product implements Serializable{
     private Long id;
     private String name;
     private String description;
-    private Integer price;
+    private BigDecimal price;
     private Producer producer;
 
     public Product() {}
 
-    public Product(String name, String description, Integer price, Producer producer) {
+    public Product(String name, String description, BigDecimal price, Producer producer) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -63,12 +64,12 @@ public class Product implements Serializable{
         this.description = description;
     }
 
-    @Column (name = "PRICE", nullable = true)
-    public Integer getPrice() {
+    @Column (name = "PRICE", nullable = true, precision = 10, scale = 2)
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
     

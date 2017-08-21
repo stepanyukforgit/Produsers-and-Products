@@ -1,5 +1,6 @@
 package stepanyuk.productsandproducers.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public void saveProduct(String productName, String productDescription, String productPrice, Producer producer) {
         productDao.saveProduct(
-            new Product(productName, productDescription, Integer.valueOf(productPrice),producer));
+            new Product(productName, productDescription, new BigDecimal(productPrice),producer));
     }
  
     @Override
@@ -38,7 +39,7 @@ public class ProductServiceImpl implements ProductService{
             String productDescription, String id, Producer producer) {
         Product product = findById(Long.valueOf(id));
         product.setName(productName);
-        product.setPrice(Integer.parseInt(productPrice));
+        product.setPrice(new BigDecimal(productPrice));
         product.setDescription(productDescription);
         product.setProducer(producer);
         productDao.updateProduct(product);
