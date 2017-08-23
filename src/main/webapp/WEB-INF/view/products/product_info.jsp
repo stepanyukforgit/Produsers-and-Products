@@ -19,7 +19,9 @@
     <link rel="icon" href="<spring:url value="/resources/picture/favicon.ico" />">
     <spring:url value="/resources/css/bootstrap.min.css" var="mainCss" />
     <spring:url value="/resources/css/dashboard.css" var="dashCss" />
-
+    <spring:url value="/resources/js/bootstrap.min.js" var="mainJs" />
+    <spring:url value="/resources/js/productsandproducers.js" var="prodJs" />
+    
     <title>Producers and products</title>
     
     <!-- Bootstrap core CSS -->
@@ -45,7 +47,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" action="/search_results">
-            <input name="search" type="text" class="form-control" placeholder="Search...">
+            <input name="search" type="text" class="form-control" placeholder="Search..." data-toggle="tooltip" title="Search by Producer and Product name" data-placement="bottom">
           </form>
         </div>
       </div>
@@ -83,6 +85,11 @@
           </div>
       </div>
     </div>
-   </div>   
+   </div>
+    <!-- Bootstrap core JavaScript================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="${mainJs}"></script>
+    <script src="${prodJs}"></script>
   </body>
 </html>
