@@ -9,7 +9,7 @@ import stepanyuk.productsandproducers.model.Producer;
  */
 public interface ProducerService {
     
-    void saveProducer(String producerName, String producerAddress, String producerDescription);
+    long saveProducer(String producerName, String producerAddress, String producerDescription);
     List<Producer> findAll();
     List<Producer> searchProducers(String searchProducers);
     Producer findById(Long id);

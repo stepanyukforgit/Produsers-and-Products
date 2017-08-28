@@ -18,8 +18,8 @@ public class ProductServiceImpl implements ProductService{
     private ProductDao productDao;
     
     @Override
-    public void saveProduct(String productName, String productDescription, String productPrice, Producer producer) {
-        productDao.saveProduct(
+    public long saveProduct(String productName, String productDescription, String productPrice, Producer producer) {
+        return productDao.saveProduct(
             new Product(productName, productDescription, new BigDecimal(productPrice),producer));
     }
  

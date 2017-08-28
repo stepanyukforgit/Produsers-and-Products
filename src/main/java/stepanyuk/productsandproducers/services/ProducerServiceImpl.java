@@ -16,8 +16,9 @@ public class ProducerServiceImpl implements ProducerService{
     private ProducerDao producerDao;
     
     @Override
-    public void saveProducer(String producerName, String producerAddress, String producerDescription) {
-        producerDao.saveProducer(new Producer(producerName, producerAddress, producerDescription));
+    public long saveProducer(String producerName, String producerAddress, String producerDescription) {
+        long id =  (Long) producerDao.saveProducer(new Producer(producerName, producerAddress, producerDescription));
+        return id;
     }
 
     @Override

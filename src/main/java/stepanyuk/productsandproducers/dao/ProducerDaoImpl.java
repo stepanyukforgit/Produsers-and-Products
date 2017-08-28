@@ -40,8 +40,9 @@ public class ProducerDaoImpl implements ProducerDao{
     }
 
     @Override
-    public void saveProducer(Producer producer) {
-        sessionFactory.getCurrentSession().save(producer);
+    public long saveProducer(Producer producer) {
+        long id = (Long) sessionFactory.getCurrentSession().save(producer);
+        return id;
     }
     
     @Override

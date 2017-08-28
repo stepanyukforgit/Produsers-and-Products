@@ -13,6 +13,6 @@ public interface ProductDao {
     List<Product> findByName(String searchProducts);
     Product findById(Long id);
     void updateProduct(Product product);
-    void saveProduct(Product product);
+    long saveProduct(Product product);
     void delete(Product product);
 }

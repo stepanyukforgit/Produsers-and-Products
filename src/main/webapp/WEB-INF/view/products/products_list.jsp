@@ -24,6 +24,7 @@
     <spring:url value="/resources/css/dashboard.css" var="dashCss" />
     <spring:url value="/resources/js/bootstrap.min.js" var="mainJs" />
     <spring:url value="/resources/js/productsandproducers.js" var="prodJs" />
+    <spring:url value="/resources/js/productlist.js" var="productListJs" />
     
     <title>Producers and products</title>
     
@@ -72,7 +73,7 @@
           <h1 class="page-header">Products</h1>
         <div class="row placeholders">
           <div class="table-responsive">
-            <table class="table table-striped">
+            <table id="product-table" class="table table-striped">
               <thead>
                 <tr>
                   <th>#</th>
@@ -84,7 +85,7 @@
               </thead>
               <tbody>
                   <c:forEach var="product" items="${products}" varStatus="loop">
-                      <tr align="left">
+                    <tr align="left">
                       <td width="3%">${loop.count}</td>
                       <td width="17%">
                         <a href="/products/product_info/${product.id}">${product.name}</a>
@@ -107,7 +108,7 @@
     <div class="modal fade" id="add-product-modal">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
-              <form action="/products/products_list" method="POST">
+              <form>
                 <div class="modal-header">
                   <button class="close" type="button" data-dismiss="modal">&times;</button>
                   <h4 class="maodal-title">Add new product</h4>
@@ -115,27 +116,27 @@
                 <div class="modal-body">
                   <div class="form-group">
                     <label>Product name:</label>
-                    <input type="text" class="form-control" name="productName" required>
+                    <input type="text" class="form-control" id="productName" required>
                   </div>
                   <div class="form-group">
                     <label>Price:</label>
-                    <input type="text" class="form-control" name="productPrice" required>
+                    <input type="text" class="form-control" id="productPrice" required>
                   </div>
                   <div class="form-group">
                     <label>Description:</label>
-                    <textarea class="form-control" rows="5" name="productDescription"></textarea>
+                    <textarea class="form-control" rows="5" id="productDescription"></textarea>
                   </div>
                     
                   <div class="form-group">
                     <label for="sel1">Producer:</label>
-                    <select class="form-control" name="producerId" required>
+                    <select class="form-control" id="producerId" required>
                       <c:forEach var="producer" items="${producers}" varStatus="loop">
                         <option value="${producer.id}">${producer.name}</option>
                       </c:forEach>
                     </select>
                   </div>
                   <div class="modal-footer">
-                    <button class="btn btn-success" type="submit">Add</button>
+                      <button class="btn btn-success" onclick="addNewProduct();">Add</button>
                   </div>
                 </div>
             </form>
@@ -147,6 +148,7 @@
     <!-- Bootstrap core JavaScript================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="${productListJs}"></script>
     <script src="${mainJs}"></script>
     <script src="${prodJs}"></script>
   </body>
