@@ -40,7 +40,8 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+                  data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Producers and products</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -50,7 +51,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" action="/search_results">
-            <input name="search" type="text" class="form-control" placeholder="Search..." data-toggle="tooltip" title="Search by Producer and Product name" data-placement="bottom">
+            <input name="search" type="text" class="form-control" placeholder="Search..." 
+                   data-toggle="tooltip" title="Search by Producer and Product name" data-placement="bottom">
           </form>
         </div>
       </div>
@@ -116,7 +118,8 @@
                 <div class="modal-body">
                   <div class="form-group">
                     <label>Product name:</label>
-                    <input type="text" class="form-control" id="productName" required>
+                    <input type="text" class="form-control" id="productName" required
+                           data-toggle="tooltip" title="It's can't too big(more then 20 chars) or empty..." data-placement="right">
                   </div>
                   <div class="form-group">
                     <label>Price:</label>
@@ -124,7 +127,8 @@
                   </div>
                   <div class="form-group">
                     <label>Description:</label>
-                    <textarea class="form-control" rows="5" id="productDescription"></textarea>
+                    <textarea class="form-control" rows="5" id="productDescription" 
+                              data-toggle="tooltip" title="It's can't too big(more then 200 chars)..." data-placement="right"></textarea>
                   </div>
                     
                   <div class="form-group">

@@ -6,7 +6,6 @@ function validateAndAdd(){
     var form = document.getElementById("form-in-modal");
     
     if(!prodName.value || (prodName.value.length > 20)){        
-        prodName.placeholder = "It's can't too big(more then 20 chars) or empty...";
         showError(prodName.parentElement);
         doSubmit = false;
     }else{
@@ -14,7 +13,6 @@ function validateAndAdd(){
     }
 
     if(prodDescr.value.length > 200){
-        prodDescr.placeholder = "It's can't too big(more then 200 chars)...";
         showError(prodDescr.parentElement);
         doSubmit = false;
     }else{
