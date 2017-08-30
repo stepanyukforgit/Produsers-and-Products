@@ -68,8 +68,9 @@ function addNewProducer() {
     request.send(json);
 }
 
-function parseMessage(responseXML) {
-    if (responseXML == null) {
+function parseMessage(responseText) {
+    if (responseText == null) {
+alert("in parseMessage"+responseText);      
         return false;
     } else {
         var producer = JSON.parse(responseText);
@@ -99,8 +100,8 @@ function appendProducer(producer){
     cell3.innerHTML = producer.address;
     
     var cell4 = document.createElement("td");
-    cell3.setAttribute("width","50%");
-    cell3.innerHTML = producer.description;
+    cell4.setAttribute("width","50%");
+    cell4.innerHTML = producer.description;
     
     newRow.appendChild(cell1);
     newRow.appendChild(cell2);
