@@ -44,7 +44,8 @@ public class ProducersController {
     }
 
     @RequestMapping(value = "/producers_list", method = POST)
-    public @ResponseBody Map<String, String> addNewProducer(@RequestBody String params) {
+    @ResponseBody
+    public Map<String, String> addNewProducer(@RequestBody String params) {
         long id = 0;
         
         try {

@@ -23,8 +23,8 @@
     <spring:url value="/resources/css/bootstrap.min.css" var="mainCss" />
     <spring:url value="/resources/css/dashboard.css" var="dashCss" />
     <spring:url value="/resources/js/bootstrap.min.js" var="mainJs" />
-    <spring:url value="/resources/js/productsandproducers.js" var="prodJs" />
     <spring:url value="/resources/js/productlist.js" var="productListJs" />
+    <spring:url value="/resources/js/tooltip.js" var="tooltipJs" />
     
     <title>Producers and products</title>
     
@@ -97,7 +97,7 @@
                   </c:forEach>
               </tbody>
             </table>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-product-modal">Add new Product</button>              
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-product-modal">Add new Product</button>  
           </div>
         </div>
       </div>
@@ -108,7 +108,7 @@
     <div class="modal fade" id="add-product-modal">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
-              <form>
+              <form id="form-in-modal">
                 <div class="modal-header">
                   <button class="close" type="button" data-dismiss="modal">&times;</button>
                   <h4 class="maodal-title">Add new product</h4>
@@ -120,7 +120,7 @@
                   </div>
                   <div class="form-group">
                     <label>Price:</label>
-                    <input type="text" class="form-control" id="productPrice" required>
+                    <input type="number" step="0.01" min="0" max="1000000" class="form-control" id="productPrice" required>
                   </div>
                   <div class="form-group">
                     <label>Description:</label>
@@ -136,7 +136,7 @@
                     </select>
                   </div>
                   <div class="modal-footer">
-                      <button class="btn btn-success" onclick="addNewProduct();">Add</button>
+                      <button class="btn btn-success" onclick="validateAndAdd();">Add</button>
                   </div>
                 </div>
             </form>
@@ -150,6 +150,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="${productListJs}"></script>
     <script src="${mainJs}"></script>
-    <script src="${prodJs}"></script>
+    <script src="${tooltipJs}"></script>
   </body>
 </html>

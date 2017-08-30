@@ -20,7 +20,7 @@
     <spring:url value="/resources/css/bootstrap.min.css" var="mainCss" />
     <spring:url value="/resources/css/dashboard.css" var="dashCss" />
     <spring:url value="/resources/js/bootstrap.min.js" var="mainJs" />
-    <spring:url value="/resources/js/productsandproducers.js" var="prodJs" />
+    <spring:url value="/resources/js/tooltip.js" var="tooltipJs" />
     
     <title>Producers and products</title>
     
@@ -90,6 +90,6 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="${mainJs}"></script>
-    <script src="${prodJs}"></script>
+    <script src="${tooltipJs}"></script>
   </body>
 </html>

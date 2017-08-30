@@ -46,7 +46,8 @@ public class ProductsController {
     }
 
     @RequestMapping(value = "/products_list", method = POST)
-    public @ResponseBody Map<String, String> addNewProduct(@RequestBody String params) {
+    @ResponseBody
+    public  Map<String, String> addNewProduct(@RequestBody String params) {
         long id = 0;
 
         try {
@@ -65,7 +66,6 @@ public class ProductsController {
         resBody.put("description", prod.getDescription());
         resBody.put("producerName", prod.getProducer().getName());
         resBody.put("id", prod.getId().toString());
-        
         return resBody;
     }
 

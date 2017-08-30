@@ -4,11 +4,11 @@
     Author     : stepanyuk
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="stepanyuk.productsandproducers.model.Producer"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,7 +22,7 @@
     <spring:url value="/resources/css/bootstrap.min.css" var="mainCss" />
     <spring:url value="/resources/css/dashboard.css" var="dashCss" />
     <spring:url value="/resources/js/bootstrap.min.js" var="mainJs" />
-    <spring:url value="/resources/js/productsandproducers.js" var="prodJs" />
+    <spring:url value="/resources/js/tooltip.js" var="tooltipJs" />
     <spring:url value="/resources/js/producerlist.js" var="producerListJs" />
     
     <title>Producers and products</title>
@@ -109,7 +109,7 @@
     <div class="modal fade" id="add-producer-modal">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
-              <form>
+              <form id="form-in-modal">
                 <div class="modal-header">
                   <button class="close" type="button" data-dismiss="modal">&times;</button>
                   <h4 class="maodal-title">Add new producer</h4>
@@ -128,7 +128,7 @@
                     <textarea class="form-control" rows="5" id="producerDescription"></textarea>
                   </div>
                   <div class="modal-footer">
-                    <button class="btn btn-success" onclick="addNewProducer();">Add</button>
+                    <button class="btn btn-success" onclick="validateAndAdd();">Add</button>
                   </div>
                 </div>
             </form>
@@ -142,6 +142,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="${producerListJs}"></script>
     <script src="${mainJs}"></script>
-    <script src="${prodJs}"></script>
+    <script src="${tooltipJs}"></script>
   </body>
 </html>
