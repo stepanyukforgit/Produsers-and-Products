@@ -130,7 +130,7 @@
                   <div class="form-group">
                     <label>Description:</label>
                     <textarea class="form-control" rows="5" id="producerDescription"
-                              data-toggle="tooltip" title="It's can't too big(more then 200 chars)..." data-placement="right">></textarea>
+                              data-toggle="tooltip" title="It's can't too big(more then 200 chars)..." data-placement="right"></textarea>
                   </div>
                   <div class="modal-footer">
                     <button class="btn btn-success" onclick="validateAndAdd();">Add</button>

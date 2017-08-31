@@ -31,7 +31,10 @@ function validateAndAdd(){
         if(!doSubmit){
             e.preventDefault();
         }else{
-            addNewProducer();
+            e.preventDefault();
+        //find out
+            $("#add-producer-modal").modal("hide");
+            addNewProducer();        
         }
     });        
 }
@@ -53,7 +56,7 @@ function addNewProducer() {
     });
 
     var request = new XMLHttpRequest();
-    request.open("POST", "/producers/producers_list", false);
+    request.open("POST", "/producers/producers_list", true);
     request.setRequestHeader("Content-Type", "application/json");
     request.onreadystatechange = function() {
                                     if (request.readyState == 4) {

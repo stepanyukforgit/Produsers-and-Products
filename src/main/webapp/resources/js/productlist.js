@@ -23,6 +23,9 @@ function validateAndAdd(){
         if(!doSubmit){
             e.preventDefault();
         }else{
+            e.preventDefault();
+        //find out
+            $("#add-product-modal").modal("hide");
             addNewProduct();
         }
     });        
