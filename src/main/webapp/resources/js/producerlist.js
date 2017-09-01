@@ -79,14 +79,14 @@ alert("in parseMessage"+responseText);
 }
 
 function appendProducer(producer){
-    var producerTable = document.getElementById("producer-table");
+    var producerTableBody = document.getElementById("producer-table-body");
     
     var newRow = document.createElement("tr");
     newRow.setAttribute("align","left");
     
     var cell1 = document.createElement("td");
     cell1.setAttribute("width","3%");
-    cell1.innerHTML = producerTable.rows.length;
+    cell1.innerHTML = document.getElementById("producer-table").rows.length;
     
     var cell2 = document.createElement("td");
     cell2.setAttribute("width","17%");
@@ -108,5 +108,5 @@ function appendProducer(producer){
     newRow.appendChild(cell3);
     newRow.appendChild(cell4);
     
-    producerTable.appendChild(newRow);
+    producerTableBody.appendChild(newRow);
 }

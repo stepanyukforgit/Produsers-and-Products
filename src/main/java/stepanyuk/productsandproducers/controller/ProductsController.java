@@ -39,7 +39,7 @@ public class ProductsController {
 
     @RequestMapping(value = "/products_list", params = "productId", method = GET)
     public String deleteProduct(String productId, Model model) {
-        productService.delete(productService.findById(Long.valueOf(productId)));
+        productService.delete(Long.valueOf(productId));
         model.addAttribute("producers", producerService.findAll());
         model.addAttribute("products", productService.findAll());
         return "products/products_list";
@@ -48,24 +48,23 @@ public class ProductsController {
     @RequestMapping(value = "/products_list", method = POST)
     @ResponseBody
     public  Map<String, String> addNewProduct(@RequestBody String params) {
-        long id = 0;
-
+        Product product = null;
+        
         try {
             ObjectMapper om = new ObjectMapper();
             Map<String, String> reqBody = om.readValue(params, Map.class);
-            id = productService.saveProduct(reqBody.get("name"), reqBody.get("description"),
+            product = productService.saveProduct(reqBody.get("name"), reqBody.get("description"),
                     reqBody.get("price"), producerService.findById(Long.valueOf(reqBody.get("producerId"))));
         } catch (IOException ex) {
             System.out.println(ex);
         }
         
         Map<String, String> resBody = new HashMap();
-        Product prod = productService.findById(id);
-        resBody.put("name", prod.getName());
-        resBody.put("price", prod.getPrice().toString());
-        resBody.put("description", prod.getDescription());
-        resBody.put("producerName", prod.getProducer().getName());
-        resBody.put("id", prod.getId().toString());
+        resBody.put("name", product.getName());
+        resBody.put("price", product.getPrice().toString());
+        resBody.put("description", product.getDescription());
+        resBody.put("producerName", product.getProducer().getName());
+        resBody.put("id", product.getId().toString());
         return resBody;
     }
 

@@ -1,9 +1,10 @@
 package stepanyuk.productsandproducers.dao;
 
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.hibernate.Hibernate;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import stepanyuk.productsandproducers.model.Producer;
@@ -15,49 +16,53 @@ import stepanyuk.productsandproducers.model.Producer;
 @Repository
 public class ProducerDaoImpl implements ProducerDao{
     
-    @Autowired
-    private SessionFactory sessionFactory;
-
+    @PersistenceContext
+    private EntityManager entityManager;
+    
+    //Hibernate's sessions demo
+    //see JPA approach in ProductDaoImpl
+    
     @Override
     @Transactional(readOnly = true)
     public List<Producer> findAll() {
-        return sessionFactory.getCurrentSession()
-                .createQuery("from Producer p").list();
+        Session session = entityManager.unwrap(Session.class);
+        
+        return session.createQuery("from Producer p").list();
     }
 
     @Override
     @Transactional(readOnly = true)
     public Producer findById(Long id) {
-        return sessionFactory.getCurrentSession().get(Producer.class, id);
+        return entityManager.unwrap(Session.class).get(Producer.class, id);
     }
     
     @Override
     @Transactional(readOnly = true)
     public Producer findByIdWithProducts(Long id){
-        Producer producer = sessionFactory.getCurrentSession().get(Producer.class, id);
+        Producer producer = entityManager.unwrap(Session.class).get(Producer.class, id);
         Hibernate.initialize(producer.getProducts());
         return producer;
     }
 
     @Override
     public long saveProducer(Producer producer) {
-        long id = (Long) sessionFactory.getCurrentSession().save(producer);
+        long id = (Long) entityManager.unwrap(Session.class).save(producer);
         return id;
     }
     
     @Override
     public void updateProducer(Producer producer) {
-        sessionFactory.getCurrentSession().update(producer);
+        entityManager.unwrap(Session.class).update(producer);
     }
 
     @Override
-    public void delete(Producer producer) {
-        sessionFactory.getCurrentSession().delete(producer);
+    public void delete(Long id) {
+        entityManager.unwrap(Session.class).delete(findById(id));
     }
     
     @Override
     public List<Producer> findByName(String searchProducers){
         String hql = "from Producer p where lower(p.name) like lower('%" + searchProducers + "%')";
-        return sessionFactory.getCurrentSession().createQuery(hql).list();
+        return entityManager.unwrap(Session.class).createQuery(hql).list();
     }
 }

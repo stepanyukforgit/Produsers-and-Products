@@ -18,40 +18,46 @@ public class ProductServiceImpl implements ProductService{
     private ProductDao productDao;
     
     @Override
-    public long saveProduct(String productName, String productDescription, String productPrice, Producer producer) {
-        return productDao.saveProduct(
+    public Product saveProduct(String productName, String productDescription, String productPrice, Producer producer) {
+        
+        return productDao.saveOrUpdate(
             new Product(productName, productDescription, new BigDecimal(productPrice),producer));
     }
  
     @Override
     public List<Product> findAll() {
+        
         return productDao.findAll();
     }
 
     @Override
     public Product findById(Long id) {
+        
         return productDao.findById(id);
     }
     
     
     @Override
-    public void updateProduct(String productName, String productPrice, 
+    public Product updateProduct(String productName, String productPrice, 
             String productDescription, String id, Producer producer) {
         Product product = findById(Long.valueOf(id));
         product.setName(productName);
         product.setPrice(new BigDecimal(productPrice));
         product.setDescription(productDescription);
         product.setProducer(producer);
-        productDao.updateProduct(product);
+
+        return productDao.saveOrUpdate(product);
     }
     
     @Override
-    public void delete(Product product) {
-        productDao.delete(product);
+    public void delete(Long id) {
+        
+        productDao.delete(id);
     }
     
     @Override
     public List<Product> searchProducts(String searchProducts){
+        
         return productDao.findByName(searchProducts);
     }
 }

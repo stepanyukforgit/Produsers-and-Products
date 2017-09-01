@@ -15,5 +15,5 @@ public interface ProducerDao {
     Producer findByIdWithProducts(Long id);
     void updateProducer(Producer producer);
     long saveProducer(Producer producer);
-    void delete(Producer producer);
+    void delete(Long id);
 }

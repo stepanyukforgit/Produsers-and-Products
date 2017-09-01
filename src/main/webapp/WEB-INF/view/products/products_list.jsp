@@ -85,7 +85,7 @@
                   <th>Producer</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="product-table-body">
                   <c:forEach var="product" items="${products}" varStatus="loop">
                     <tr align="left">
                       <td width="3%">${loop.count}</td>
@@ -118,7 +118,7 @@
                 <div class="modal-body">
                   <div class="form-group">
                     <label>Product name:</label>
-                    <input type="text" class="form-control" id="productName" required
+                    <input type="text" class="form-control" id="productName" maxlength="20" required
                            data-toggle="tooltip" title="It's can't too big(more then 20 chars) or empty..." data-placement="right">
                   </div>
                   <div class="form-group">
@@ -127,7 +127,7 @@
                   </div>
                   <div class="form-group">
                     <label>Description:</label>
-                    <textarea class="form-control" rows="5" id="productDescription" 
+                    <textarea class="form-control" rows="5" id="productDescription" maxlength="200"
                               data-toggle="tooltip" title="It's can't too big(more then 200 chars)..." data-placement="right"></textarea>
                   </div>
                     

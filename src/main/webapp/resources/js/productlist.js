@@ -69,14 +69,14 @@ function parseMessage(responseText) {
 }
 
 function appendProduct(product){
-    var productTable = document.getElementById("product-table");
+    var productTableBody = document.getElementById("product-table-body");
     
     var newRow = document.createElement("tr");
     newRow.setAttribute("align","left");
     
     var cell1 = document.createElement("td");
     cell1.setAttribute("width","3%");
-    cell1.innerHTML = productTable.rows.length;
+    cell1.innerHTML = document.getElementById("product-table").rows.length;
     
     var cell2 = document.createElement("td");
     cell2.setAttribute("width","17%");
@@ -103,5 +103,5 @@ function appendProduct(product){
     newRow.appendChild(cell4);
     newRow.appendChild(cell5);
     
-    productTable.appendChild(newRow);
+    productTableBody.appendChild(newRow);
 }
