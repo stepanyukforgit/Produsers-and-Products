@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -20,10 +22,28 @@ import javax.persistence.Table;
 @Entity
 @Table (name = "PRODUCER")
 public class Producer implements Serializable{
+    
+    @Id
+    @GeneratedValue (strategy = IDENTITY)
+    @Column (name = "ID_PRODUCER")
+    @Getter @Setter
     private Long id;
+    
+    @Column (name = "NAME", nullable = false)
+    @Getter @Setter
     private String name;
+    
+    @Column (name = "ADDRESS", nullable = false)
+    @Getter @Setter
     private String address;
+    
+    @Column (name = "DESCRIPTION", nullable = true)
+    @Lob
+    @Getter @Setter
     private String description;
+    
+    @OneToMany (mappedBy = "producer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Getter @Setter
     private Set<Product> products = new HashSet<Product>();
 
     public Producer() {}
@@ -32,53 +52,5 @@ public class Producer implements Serializable{
         this.name = name;
         this.address = address;
         this.description = description;
-    }
-    
-    @Id
-    @GeneratedValue (strategy = IDENTITY)
-    @Column (name = "ID_PRODUCER")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Column (name = "NAME", nullable = false)
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Column (name = "ADDRESS", nullable = false)
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    @Column (name = "DESCRIPTION", nullable = true)
-    @Lob
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @OneToMany (mappedBy = "producer", cascade = CascadeType.ALL, orphanRemoval = true)
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
     }
 }

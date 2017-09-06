@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -19,10 +21,29 @@ import javax.persistence.Table;
 @Entity
 @Table (name = "PRODUCT")
 public class Product implements Serializable{
+    
+    @Id
+    @GeneratedValue (strategy = IDENTITY)
+    @Column (name = "ID")
+    @Getter @Setter
     private Long id;
+    
+    @Column (name = "NAME", nullable = false)
+    @Getter @Setter
     private String name;
+    
+    @Column (name = "DESCRIPTION", nullable = true)
+    @Lob
+    @Getter @Setter
     private String description;
+    
+    @Column (name = "PRICE", nullable = true, precision = 10, scale = 2)
+    @Getter @Setter
     private BigDecimal price;
+    
+    @ManyToOne
+    @JoinColumn (name = "ID_PRODUCER")
+    @Getter @Setter
     private Producer producer;
 
     public Product() {}
@@ -31,55 +52,6 @@ public class Product implements Serializable{
         this.name = name;
         this.description = description;
         this.price = price;
-        this.producer = producer;
-    }
-
-    @Id
-    @GeneratedValue (strategy = IDENTITY)
-    @Column (name = "ID")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Column (name = "NAME", nullable = false)
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Column (name = "DESCRIPTION", nullable = true)
-    @Lob
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Column (name = "PRICE", nullable = true, precision = 10, scale = 2)
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-    
-    @ManyToOne
-    @JoinColumn (name = "ID_PRODUCER")
-    public Producer getProducer() {
-        return producer;
-    }
-
-    public void setProducer(Producer producer) {
         this.producer = producer;
     }
 }
