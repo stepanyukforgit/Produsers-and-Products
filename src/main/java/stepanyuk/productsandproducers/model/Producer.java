@@ -1,5 +1,6 @@
 package stepanyuk.productsandproducers.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,6 +45,7 @@ public class Producer implements Serializable{
     
     @OneToMany (mappedBy = "producer", cascade = CascadeType.ALL, orphanRemoval = true)
     @Getter @Setter
+    @JsonIgnore
     private Set<Product> products = new HashSet<Product>();
 
     public Producer() {}

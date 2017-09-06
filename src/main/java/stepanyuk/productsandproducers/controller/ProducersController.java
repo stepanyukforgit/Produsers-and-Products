@@ -2,7 +2,6 @@ package stepanyuk.productsandproducers.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.bind.annotation.ResponseBody;
-import stepanyuk.productsandproducers.model.Producer;
 import stepanyuk.productsandproducers.services.ProducerService;
 import stepanyuk.productsandproducers.services.ProductService;
 
@@ -45,27 +43,21 @@ public class ProducersController {
 
     @RequestMapping(value = "/producers_list", method = POST)
     @ResponseBody
-    public Map<String, String> addNewProducer(@RequestBody String params) {
+    public String addNewProducer(@RequestBody String params) {
         long id = 0;
-        
+        String jsonProducer = "";
         try {
             ObjectMapper om = new ObjectMapper();
             Map<String, String> reqBody = om.readValue(params, Map.class);
             id = producerService.saveProducer(reqBody.get("name"), reqBody.get("address"), reqBody.get("description"));
+            jsonProducer = om.writeValueAsString(producerService.findById(id));
         } catch (IOException ex) {
             System.out.println(ex);
         }
-        Map<String, String> resBody = new HashMap();
-        Producer prod = producerService.findById(id);
-        resBody.put("name", prod.getName());
-        resBody.put("address", prod.getAddress());
-        resBody.put("description", prod.getDescription());
-        resBody.put("id", prod.getId().toString());
-        
-        return resBody;
+
+        return jsonProducer;
     }
 
-//pass Producer
     @RequestMapping(value = "/producer_info/{producerId}", method = GET)
     public String showProducerInfo(@PathVariable Long producerId, Model model) {
         model.addAttribute("producer", producerService.findById(producerId));

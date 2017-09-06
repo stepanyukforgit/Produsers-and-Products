@@ -2,7 +2,6 @@ package stepanyuk.productsandproducers.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,25 +46,20 @@ public class ProductsController {
 
     @RequestMapping(value = "/products_list", method = POST)
     @ResponseBody
-    public  Map<String, String> addNewProduct(@RequestBody String params) {
-        Product product = null;
-        
+    public  String addNewProduct(@RequestBody String params) {
+        String jsonProduct = "";
         try {
             ObjectMapper om = new ObjectMapper();
             Map<String, String> reqBody = om.readValue(params, Map.class);
-            product = productService.saveProduct(reqBody.get("name"), reqBody.get("description"),
+            Product product = productService.saveProduct(reqBody.get("name"), reqBody.get("description"),
                     reqBody.get("price"), producerService.findById(Long.valueOf(reqBody.get("producerId"))));
+            
+            jsonProduct = om.writeValueAsString(product);
         } catch (IOException ex) {
             System.out.println(ex);
         }
-        
-        Map<String, String> resBody = new HashMap();
-        resBody.put("name", product.getName());
-        resBody.put("price", product.getPrice().toString());
-        resBody.put("description", product.getDescription());
-        resBody.put("producerName", product.getProducer().getName());
-        resBody.put("id", product.getId().toString());
-        return resBody;
+
+        return jsonProduct;
     }
 
     @RequestMapping(value = "/product_info/{productId}", method = GET)
