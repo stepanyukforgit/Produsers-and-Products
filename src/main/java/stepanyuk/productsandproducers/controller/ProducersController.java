@@ -41,7 +41,7 @@ public class ProducersController {
         return "producers/producers_list";
     }
 
-    @RequestMapping(value = "/producers_list", method = POST)
+    @RequestMapping(value = "/producers_list", method = POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String addNewProducer(@RequestBody String params) {
         long id = 0;
@@ -54,7 +54,6 @@ public class ProducersController {
         } catch (IOException ex) {
             System.out.println(ex);
         }
-
         return jsonProducer;
     }
 
