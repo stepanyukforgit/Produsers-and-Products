@@ -132,8 +132,13 @@
                     <textarea class="form-control" rows="5" id="producerDescription" maxlength="200"
                               data-toggle="tooltip" title="It's can't too big(more then 200 chars)..." data-placement="right"></textarea>
                   </div>
+                  <div id="product-div" class="form-group">
+                    <button type="button" class="btn btn-default btn-sm" onclick="newFieldsForProduct()">
+                      <span class="glyphicon glyphicon-plus"></span> Set producesr's product
+                    </button>
+                  </div>
                   <div class="modal-footer">
-                    <button class="btn btn-success" onclick="validateAndAdd();">Add</button>
+                    <button class="btn btn-success" onclick="validateAndAdd()">Add</button>
                   </div>
                 </div>
             </form>

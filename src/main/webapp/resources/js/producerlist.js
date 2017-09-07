@@ -32,11 +32,11 @@ function validateAndAdd(){
             e.preventDefault();
         }else{
             e.preventDefault();
-        //find out
+
             $("#add-producer-modal").modal("hide");
-            addNewProducer();        
+            addNewProducer();       
         }
-    });        
+    });
 }
 
 function showError(container){
@@ -70,7 +70,6 @@ function addNewProducer() {
 
 function parseMessage(responseText) {
     if (responseText == null) {
-alert("in parseMessage"+responseText);      
         return false;
     } else {
         var producer = JSON.parse(responseText);
@@ -109,4 +108,80 @@ function appendProducer(producer){
     newRow.appendChild(cell4);
     
     producerTableBody.appendChild(newRow);
+}
+
+function newFieldsForProduct(){   
+    var formGroupProduct = document.getElementById("product-div");
+    
+    var productNameDiv = document.createElement("div");
+    productNameDiv.setAttribute("class", "form-group");
+    var productNameLab = document.createElement("label");
+    productNameLab.innerHTML = "Product name:";
+    var productNameInp = document.createElement("input");
+    productNameInp.setAttribute("type","text");
+    productNameInp.setAttribute("class","form-control");
+    productNameInp.setAttribute("maxlength","20");
+    productNameInp.setAttribute("data-toggle","tooltip");
+    productNameInp.setAttribute("title","It's can't too big(more then 20 chars) or empty...");
+    productNameInp.setAttribute("data-placement","right");
+    productNameInp.required = true;
+    productNameDiv.appendChild(productNameLab);
+    productNameDiv.appendChild(productNameInp);
+    
+    var productPriceDiv = document.createElement("div");
+    productPriceDiv.setAttribute("class", "form-group");
+    var productPriceLab = document.createElement("label");
+    productPriceLab.innerHTML = "Price:";
+    var productPriceInp = document.createElement("input");
+    productPriceInp.setAttribute("class","form-control");
+    productPriceInp.setAttribute("type","number");
+    productPriceInp.setAttribute("step","0.01");
+    productPriceInp.setAttribute("min","0");
+    productPriceInp.setAttribute("max","1000000");
+    productPriceInp.required = true;
+    productPriceDiv.appendChild(productPriceLab);
+    productPriceDiv.appendChild(productPriceInp);
+    
+    var productDescrDiv = document.createElement("div");
+    productDescrDiv.setAttribute("class", "form-group");
+    var productDescrLab = document.createElement("label");
+    productDescrLab.innerHTML = "Description:";
+    var productDescrTexrAr = document.createElement("textarea");
+    productDescrTexrAr.setAttribute("class","form-control");
+    productDescrTexrAr.setAttribute("rows","3");
+    productDescrTexrAr.setAttribute("maxlength","200");
+    productDescrTexrAr.setAttribute("data-toggle","tooltip");
+    productDescrTexrAr.setAttribute("title","It's can't too big(more then 200 chars)...");
+    productDescrTexrAr.setAttribute("data-placement","right");
+    productDescrDiv.appendChild(productDescrLab);
+    productDescrDiv.appendChild(productDescrTexrAr);
+    
+    var productRemoveDiv = document.createElement("div");
+    productRemoveDiv.setAttribute("class", "form-group");
+    var productRemoveBtn = document.createElement("button");
+    productRemoveBtn.setAttribute("type", "button");
+    productRemoveBtn.setAttribute("class","btn btn-default btn-sm");
+    productRemoveBtn.setAttribute("onclick", "cancelProductAdding(this)");
+    productRemoveBtn.innerHTML = "<span class=\"glyphicon glyphicon-minus\"></span>"+"Cancel product edding";
+    productRemoveDiv.appendChild(productRemoveBtn);   
+    
+    formGroupProduct.insertBefore(productDescrDiv, formGroupProduct.firstChild);
+    formGroupProduct.insertBefore(productPriceDiv, formGroupProduct.firstChild);
+    formGroupProduct.insertBefore(productNameDiv, formGroupProduct.firstChild);
+    formGroupProduct.insertBefore(productRemoveDiv, formGroupProduct.firstChild);
+    formGroupProduct.insertBefore(document.createElement("hr"), formGroupProduct.firstChild);
+}
+
+function cancelProductAdding(cancelBtn){
+    var productCancelDiv = cancelBtn.parentElement;
+    var hr = productCancelDiv.previousElementSibling;
+    var productNameDiv = productCancelDiv.nextElementSibling;
+    var productPriceDiv = productNameDiv.nextElementSibling;
+    var productDescrDiv = productPriceDiv.nextElementSibling;
+    
+    hr.remove();
+    productCancelDiv.remove();
+    productNameDiv.remove();
+    productPriceDiv.remove();
+    productDescrDiv.remove();
 }
