@@ -95,7 +95,7 @@ function appendProduct(product){
     
     var cell5 = document.createElement("td");
     cell5.setAttribute("width","20%");
-    cell5.innerHTML = product.producerName;
+    cell5.innerHTML = product.producer.name;
     
     newRow.appendChild(cell1);
     newRow.appendChild(cell2);

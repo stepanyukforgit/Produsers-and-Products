@@ -21,6 +21,7 @@
     <spring:url value="/resources/css/dashboard.css" var="dashCss" />
     <spring:url value="/resources/js/bootstrap.min.js" var="mainJs" />
     <spring:url value="/resources/js/tooltip.js" var="tooltipJs" />
+    <spring:url value="/resources/js/producers_edit.js" var="prodEditdJS" />
     
     <title>Producers and products</title>
 
@@ -80,7 +81,21 @@
               <label>Description</label>
               <textarea class="form-control" rows="5" name="producerDescription">${producer.description}</textarea>
             </div>
-            <button type="submit" class="btn btn-success btn-lg" name="producerId" value="${producer.id}">Save all changes</button>
+            <div class="form-group" id="upload-div">
+              <label class="btn btn-primary" for="upload-label-input">
+                <input id="upload-label-input" type="file" style="display:none" onchange="showUpload(this)">
+                  Choose logo...
+              </label>
+              <span class='label label-info' id="upload-label-info"></span>
+            </div>
+            <div class="form-group">
+                <img id="logo" src="${producer.logo.pathToLogo}" height="100" width="100" alt="Logo not found">
+                <input type="hidden" name="producerLogo" value="${producer.logo.pathToLogo}" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-lg" name="producerId" 
+                        value="${producer.id}">Save all changes</button>
+            </div>
           </form>
         </div>
     </div>
@@ -90,5 +105,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="${mainJs}"></script>
     <script src="${tooltipJs}"></script>
+    <script src="${prodEditdJS}"></script>
   </body>
 </html>

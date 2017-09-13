@@ -20,30 +20,26 @@ import lombok.Setter;
  */
 @Entity
 @Table (name = "PRODUCT")
+@Getter @Setter
 public class Product implements Serializable{
     
     @Id
     @GeneratedValue (strategy = IDENTITY)
     @Column (name = "ID")
-    @Getter @Setter
     private Long id;
     
     @Column (name = "NAME", nullable = false)
-    @Getter @Setter
     private String name;
     
     @Column (name = "DESCRIPTION", nullable = true)
     @Lob
-    @Getter @Setter
     private String description;
     
     @Column (name = "PRICE", nullable = true, precision = 10, scale = 2)
-    @Getter @Setter
     private BigDecimal price;
     
     @ManyToOne
-    @JoinColumn (name = "ID_PRODUCER")
-    @Getter @Setter
+    @JoinColumn (name = "PRODUCER_ID")
     private Producer producer;
 
     public Product() {}

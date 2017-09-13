@@ -66,26 +66,29 @@
           <li><a href="/products/products_list">Products</a></li>
         </ul>
       </div>
-      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <h1 class="page-header">${producer.name}</h1>
-      <h4>${producer.address}</h4>
-      <h5>${producer.description}</h5>
-      <h3><a href="/producers/producer_products/${producer.id}">see all products of the producer</a></h3>
-         <div class="row">
-             <div class="col-md-1">
+      <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-2 main">
+        <h1 class="page-header">${producer.name}</h1>
+        <h4>${producer.address}</h4>
+        <h5>${producer.description}</h5>
+        <h3><a href="/producers/producer_products/${producer.id}">see all products of the producer</a></h3>
+          <div class="row">
+             <div class="col-md-1 col-sm-1">
             <form action="/producers/producer_edit/${producer.id}">
               <button class="btn btn-primary" type="submit">EDIT</button>
             </form>
           </div>
-          <div class="col-md-1">
+          <div class="col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1">
             <form action="/producers/producers_list">
               <button name="producerId" class="btn btn-danger" type="submit" value="${producer.id}">DELETE</button>
             </form>
           </div>
         </div>
       </div>
+      <div class="col-sm-3 col-md-4 main">
+        <img src="${producer.logo.pathToLogo}" height="300" width="300" alt="Logo not found">
+      </div>
     </div>
-   </div>   
+   </div>
     <!-- Bootstrap core JavaScript================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

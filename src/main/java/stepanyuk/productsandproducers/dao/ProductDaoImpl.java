@@ -21,12 +21,14 @@ public class ProductDaoImpl implements ProductDao{
     @Override
     @Transactional(readOnly = true)
     public List<Product> findAll() {
+        
         return entityManager.createQuery("from Product p").getResultList();
     }
 
     @Override
     @Transactional(readOnly = true)
     public Product findById(Long id) {
+        
         return entityManager.find(Product.class, id);
     }
 
@@ -42,12 +44,14 @@ public class ProductDaoImpl implements ProductDao{
 
     @Override
     public void delete(Long id) {
+        
         entityManager.remove(findById(id));
     }
     
     @Override
     public List<Product> findByName(String searchProducts){
         String JPQL= "FROM Product p WHERE LOWER(p.name) LIKE LOWER('%" + searchProducts + "%')";
+        
         return entityManager.createQuery(JPQL).getResultList();
     }
 }

@@ -1,6 +1,7 @@
 package stepanyuk.productsandproducers.services;
 
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 import stepanyuk.productsandproducers.model.Producer;
 
 /**
@@ -14,6 +15,9 @@ public interface ProducerService {
     List<Producer> searchProducers(String searchProducers);
     Producer findById(Long id);
     Producer findByIdWithProducts(Long id);
-    void updateProducer(String producerName, String producerAddress, String producerDescription, String id);
+    Producer findByIdWithLogo(Long id);
+    void updateProducer(String producerName, String producerAddress, String producerDescription,
+            String relLogoPath, String pathToDir, String id);
     void delete(String id);
+    String uploadLogo(MultipartFile logo, String contextPath);
 }

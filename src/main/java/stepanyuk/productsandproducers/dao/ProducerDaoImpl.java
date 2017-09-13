@@ -19,12 +19,10 @@ public class ProducerDaoImpl implements ProducerDao{
     @PersistenceContext
     private EntityManager entityManager;
     
-    //Hibernate's sessions demo
-    //see JPA approach in ProductDaoImpl
-    
     @Override
     @Transactional(readOnly = true)
     public List<Producer> findAll() {
+        //Hibernate's sessions demo
         Session session = entityManager.unwrap(Session.class);
         
         return session.createQuery("from Producer p").list();
@@ -33,7 +31,8 @@ public class ProducerDaoImpl implements ProducerDao{
     @Override
     @Transactional(readOnly = true)
     public Producer findById(Long id) {
-        return entityManager.unwrap(Session.class).get(Producer.class, id);
+        
+        return entityManager.find(Producer.class, id);
     }
     
     @Override
@@ -41,23 +40,38 @@ public class ProducerDaoImpl implements ProducerDao{
     public Producer findByIdWithProducts(Long id){
         Producer producer = entityManager.unwrap(Session.class).get(Producer.class, id);
         Hibernate.initialize(producer.getProducts());
+
         return producer;
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public Producer findByIdWithLogo(Long id){
+        Producer p = entityManager.find(Producer.class, id);
+        if(p.getLogo() != null)
+            p.getLogo().getPathToLogo();
+        
+        return p;
+    }
+
+    @Override
     public long saveProducer(Producer producer) {
-        long id = (Long) entityManager.unwrap(Session.class).save(producer);
-        return id;
+        entityManager.persist(producer);
+        
+        return producer.getId();
     }
     
     @Override
     public void updateProducer(Producer producer) {
-        entityManager.unwrap(Session.class).update(producer);
+        
+//        orphanRemoval DOESN'T WORK with unwruped session!!!
+//        entityManager.unwrap(Session.class).update(producer);
+        entityManager.merge(producer);
     }
 
     @Override
     public void delete(Long id) {
-        entityManager.unwrap(Session.class).delete(findById(id));
+        entityManager.remove(findById(id));
     }
     
     @Override
