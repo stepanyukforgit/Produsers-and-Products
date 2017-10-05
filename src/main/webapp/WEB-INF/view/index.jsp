@@ -36,13 +36,27 @@
             <span class="sr-only"><spring:message code="main.title"/></span>
           </button>
           <a class="navbar-brand" href=""><spring:message code="main.title"/></a>
-        </div>
+        </div>                
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" action="/search_results">
             <input name="search" type="text" class="form-control" 
                    placeholder="<spring:message code="search.search"/>" data-toggle="tooltip" 
                    title="<spring:message code="search.tip"/>" data-placement="bottom">
           </form>
+          <div class="navbar-right">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+                  data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">EN</span>
+          </button>
+          <a class="navbar-brand" href="/home?locale=en">EN</a>
+        </div>
+        <div class="navbar-right">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+                  data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">RU</span>
+          </button>
+          <a class="navbar-brand" href="/home?locale=ru">RU</a>
+        </div>
         </div>
       </div>
     </nav>
